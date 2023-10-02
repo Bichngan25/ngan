@@ -1,0 +1,34 @@
+/* FONT FACE - font-display: fallback; */
+@font-face {
+	font-family: "gr";
+	src: url("../fonts/SVN-Gilroy.woff2") format("woff2"),
+		url("../fonts/SVN-Gilroy.woff") format("woff");
+	font-weight: normal;
+	font-style: normal;
+	font-display: fallback;
+}
+
+@font-face {
+	font-family: "gm";
+	src: url("../fonts/SVN-GilroyMedium.woff2") format("woff2"),
+		url("../fonts/SVN-GilroyMedium.woff") format("woff");
+	font-weight: 500;
+	font-style: normal;
+	font-display: fallback;
+}
+@font-face {
+	font-family: "gb";
+	src: url("../fonts/SVN-GilroyBold.woff2") format("woff2"),
+		url("../fonts/SVN-GilroyBold.woff") format("woff");
+	font-weight: bold;
+	font-style: normal;
+	font-display: fallback;
+}
+@font-face {
+	font-family: "rm";
+	src: url("../fonts/Roboto-Medium.woff2") format("woff2"),
+		url("../fonts/Roboto-Medium.woff") format("woff");
+	font-weight: 500;
+	font-style: normal;
+	font-display: fallback;
+}

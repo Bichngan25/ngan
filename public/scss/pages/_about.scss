@@ -1,0 +1,331 @@
+.abouthero {
+    background-color: $bg-black-dark-cl;
+    min-height: 700px;
+    padding: 140px 0;
+    .title {
+        max-width: 1100px;
+        margin: auto;
+        text-align: center;
+        font-family: gr;
+        text-transform: none;
+        span {
+            color: $main-cl;
+        }
+        &::after {
+            content: "";
+            width: 80px;
+            height: 2px;
+            background: $main-cl;
+            display: block;
+            margin: 40px auto;
+        }
+    }
+    @include xs {
+        min-height: 600px;
+        padding: 110px 0;
+        .title {
+            &:after {
+                margin: 30px auto;
+            }
+        }
+    }
+}
+
+.aboutstory {
+    position: relative;
+    z-index: 100;
+    .container {
+        display: flex;
+    }
+    &__img {
+        width: calc(100vw / 2);
+        flex-shrink: 0;
+        position: relative;
+        margin-left: calc((100vw - 100%) / 2 * -1);
+        margin-top: -80px;
+    }
+    &__content {
+        padding: 50px 0 0px 50px;
+        .title {
+            margin-bottom: 16px;
+        }
+        .text {
+            font-size: $fs-t4;
+            text-align: justify;
+        }
+    }
+    @include md {
+        &__content {
+            padding: 40px 0 0px 40px;
+            .title {
+                span {
+                    display: block;
+                }
+            }
+        }
+    }
+    @include xs {
+        .container {
+            flex-direction: column;
+        }
+        &__img {
+            width: 100%;
+            position: relative;
+            margin-left: auto;
+            margin-top: -100px;
+        }
+        &__content {
+            padding: 30px 0 0 0;
+            .title {
+                span {
+                    display: inline-block;
+                }
+            }
+        }
+    }
+}
+
+.aboutbenifit {
+    .container {
+        max-width: 800px;
+    }
+    &__list {
+        margin: 40px auto 0 auto;
+        .item {
+            display: grid;
+            grid-template-columns: 60px 1fr;
+            &:not(:last-child) {
+                margin-bottom: 30px;
+            }
+            .number {
+                position: relative;
+                top: -4px;
+                color: $tcl-grey;
+                opacity: 0.3;
+            }
+            .content {
+                .title {
+                    margin-bottom: 10px;
+                    text-transform: none;
+                }
+                .text {
+                    text-align: justify;
+                    color: $tcl-grey;
+                }
+            }
+        }
+    }
+    @include xs {
+        &__list {
+            .item {
+                grid-template-columns: 40px 1fr;
+                .number {
+                    top: 0px;
+                }
+            }
+        }
+    }
+}
+.aboutnumbers {
+    &__list {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 30px;
+        grid-template-rows: 280px;
+        &-item {
+            background: $white-cl;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            .title {
+                &.--t2 {
+                    color: $main-cl;
+                    font-size: $fs-t1;
+                    margin-bottom: 15px;
+                }
+            }
+            .text {
+                text-transform: none;
+            }
+        }
+    }
+    @include md {
+        &__list {
+            grid-template-rows: 200px;
+        }
+    }
+    @include sm {
+        &__list {
+            grid-template-columns: repeat(2, 1fr);
+            grid-template-rows: repeat(2, 180px);
+            gap: 20px;
+        }
+    }
+    @include xs {
+        &__list {
+            grid-template-columns: repeat(2, 1fr);
+            grid-template-rows: repeat(2, 170px);
+            gap: 15px;
+            &-item {
+                .title {
+                    &.--t2 {
+                        font-size: $fs-t2;
+                        margin-bottom: 5px;
+                    }
+                }
+            }
+        }
+    }
+}
+
+.aboutstudy {
+    --wImg: 600px;
+    .container {
+        display: flex;
+        flex-direction: column;
+    }
+    &__title {
+        text-align: center;
+        margin-bottom: 50px;
+    }
+    &__item {
+        max-width: 1240px;
+        display: grid;
+        grid-template-columns: var(--wImg) 1fr;
+        &-content {
+            padding: 50px 0 50px 60px;
+            .title {
+                text-transform: none;
+                font-size: $fs-t2b;
+                line-height: $lh-t2b;
+            }
+            .text {
+                margin: 10px 0 30px 0;
+                color: $grey-cl-v1;
+            }
+        }
+        &:nth-child(odd) {
+            grid-template-columns: 1fr var(--wImg);
+            align-self: flex-end;
+            .aboutstudy__item-img {
+                order: 1;
+            }
+            .aboutstudy__item-content {
+                order: 0;
+                padding: 50px 60px 50px 0px;
+            }
+        }
+        &:not(:last-child) {
+            margin-bottom: 60px;
+        }
+    }
+    @include md {
+        --wImg: 1fr;
+        &__item {
+            &-content {
+                padding: 20px 0 30px 40px;
+            }
+            &:nth-child(odd) {
+                .aboutstudy__item-content {
+                    padding: 20px 40px 30px 0px;
+                }
+            }
+        }
+    }
+    @include sm {
+        --wImg: 1fr;
+        &__item {
+            &-content {
+                padding: 0px 0 30px 40px;
+            }
+            &:nth-child(odd) {
+                .aboutstudy__item-content {
+                    padding: 0px 40px 30px 0px;
+                }
+            }
+        }
+    }
+    @include xs {
+        &__title {
+            margin-bottom: 40px;
+        }
+        &__item {
+            grid-template-columns: 1fr;
+            &-content {
+                padding: 30px 0 0 0;
+                .text {
+                    margin: 10px 0 30px 0;
+                }
+            }
+            &:nth-child(odd) {
+                grid-template-columns: 1fr;
+                .aboutstudy__item-img {
+                    order: 0;
+                }
+                .aboutstudy__item-content {
+                    order: 1;
+                    padding: 30px 0 0 0;
+                }
+            }
+        }
+    }
+}
+
+.aboutgallery {
+    background: $bg-black-dark-cl;
+    &__title {
+        text-align: center;
+        margin-bottom: 60px;
+    }
+    &__imgs {
+        columns: 4;
+        gap: 20px;
+        img {
+            min-width: 100%;
+            margin-bottom: 20px;
+            // opacity: 0.5;
+            // filter: grayscale(100%);
+            // -webkit-filter: grayscale(100%);
+            // -moz-filter: grayscale(100%);
+            // @include transition(all 0.3s ease-in-out);
+            // &:hover {
+            //     opacity: 1;
+            //     filter: grayscale(0%);
+            //     -webkit-filter: grayscale(0%);
+            //     -moz-filter: grayscale(0%);
+            //     @include transition(all 0.3s ease-in-out);
+            // }
+        }
+    }
+    @include xs {
+        &__title {
+            margin-bottom: 40px;
+        }
+        &__imgs {
+            columns: 2;
+            gap: 5px;
+            img {
+                margin-bottom: 5px;
+            }
+        }
+    }
+}
+.aboutteachers {
+    &__title {
+        text-align: center;
+        margin-bottom: 60px;
+    }
+    &__list {
+        max-width: 840px;
+        margin: auto;
+    }
+    @include xs {
+        &__title {
+            margin-bottom: 40px;
+            span {
+                display: block;
+            }
+        }
+    }
+}

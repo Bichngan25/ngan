@@ -1,0 +1,444 @@
+.header {
+	width: 100vw;
+	max-width: $container-max-width;
+	position: fixed;
+	background: none;
+	height: $heightHeader;
+	z-index: 700;
+	transition: opacity 0.3s, height 0.3s;
+	-webkit-transition: opacity 0.3s, height 0.3s;
+	.container-fluid {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		height: 100%;
+	}
+	&__humburger {
+		height: 100%;
+		cursor: pointer;
+		display: flex;
+		align-items: center;
+		@include transition($t);
+		&-button {
+			width: 27px;
+			height: 18px;
+			position: relative;
+			margin-right: 8px;
+			span {
+				width: 100%;
+				height: 2px;
+				background: $bg-white-cl;
+				border-radius: 10px;
+				display: block;
+				position: absolute;
+				right: 0;
+				@include transition($t);
+				&:nth-child(1) {
+					top: 0px;
+				}
+				&:nth-child(2) {
+					width: 60%;
+					top: 50%;
+					left: 0;
+					@include transform(translateY(-50%));
+				}
+				&:nth-child(3) {
+					right: 0;
+					bottom: 0px;
+				}
+			}
+		}
+		&-text {
+			@include text($fs-text-up, $font-gr, null, $tcl-white, uppercase);
+			position: relative;
+			top: 1px;
+			span {
+				position: absolute;
+				top: 50%;
+				@include transform(translateY(-50%));
+				@include transition(0.2s);
+				&:first-child {
+					opacity: 1;
+				}
+				&:last-child {
+					opacity: 0;
+				}
+			}
+		}
+		&.--close {
+			.header__humburger-button {
+				span {
+					background: $tcl-body;
+					@include transition($t);
+				}
+			}
+			.header__humburger-text {
+				color: $tcl-body;
+				@include transition(0.2s);
+				span {
+					@include transition($t);
+					&:first-child {
+						opacity: 0;
+					}
+					&:last-child {
+						opacity: 1;
+					}
+				}
+			}
+		}
+	}
+	&__logo {
+		@include positionAlign(left);
+		@include transition($t);
+		a {
+			display: flex;
+		}
+		img,
+		svg {
+			width: 170px;
+			@include transition(0.25s);
+			path {
+				fill: #fff;
+				@include transition(0.25s);
+				&#rect{
+					fill: #00afab;
+				}
+			}
+		}
+	}
+	&__auth {
+		@include transition($t);
+		.btn--transparent {
+			padding: 0;
+			height: auto;
+		}
+	}
+	&__logged {
+		display: flex;
+		align-items: center;
+		.btn--border {
+			margin-right: 20px;
+		}
+		.noti {
+			position: relative;
+			&__symbol {
+				position: relative;
+				margin-right: 22px;
+				display: flex;
+				align-items: center;
+				cursor: pointer;
+				@include transition($t);
+				svg {
+					width: 24px;
+				}
+				&-number {
+					width: 16px;
+					height: 16px;
+					@include mid(true);
+					background: $main-cl;
+					border-radius: 50%;
+					font-size: 11px;
+					padding-top: 1px;
+					color: $tcl-white;
+					position: absolute;
+					top: 0;
+					right: -3px;
+				}
+				&:hover {
+					opacity: 0.8;
+					@include transition($t);
+				}
+			}
+			&__list {
+				width: 360px;
+				position: absolute;
+				top: 46px;
+				right: 0;
+				background: $bg-white-cl;
+				-webkit-box-shadow: 0px 9px 14px 0px rgba(0, 0, 0, 0.2);
+				-moz-box-shadow: 0px 9px 14px 0px rgba(0, 0, 0, 0.2);
+				box-shadow: 0px 9px 14px 0px rgba(0, 0, 0, 0.2);
+				opacity: 0;
+				pointer-events: none;
+				@include transition(0.2s);
+				&.active {
+					opacity: 1;
+					pointer-events: auto;
+					@include transition(0.2s);
+				}
+				&-inner {
+					height: 380px;
+					overflow-y: scroll;
+					@include customscroll;
+				}
+				.title {
+					padding: 15px;
+					line-height: normal;
+					border-bottom: 1px solid $grey-cl-v3;
+					margin-bottom: 10px;
+				}
+				&-item {
+					display: flex;
+					align-items: flex-start;
+					padding: 10px 25px 5px 15px;
+					line-height: 22px;
+					@include transition($t);
+					position: relative;
+					&:hover {
+						background: $grey-cl-v3;
+						@include transition($t);
+					}
+					.user {
+						.user__img {
+							flex-shrink: 0;
+							margin-right: 11px;
+						}
+					}
+					.text {
+						opacity: 0.6;
+						.time {
+							font-size: $fs-texts;
+						}
+					}
+					&:after {
+						content: "";
+						width: 8px;
+						height: 8px;
+						background: $main-cl;
+						border-radius: 50%;
+						position: absolute;
+						right: 15px;
+						top: 50%;
+						@include transform(translateY(-50%));
+						display: none;
+					}
+					&.active {
+						.text {
+							opacity: 1;
+							.time {
+								color: $main-cl;
+							}
+						}
+						&:after {
+							display: block;
+						}
+					}
+				}
+			}
+		}
+		.userlogged {
+			position: relative;
+			&__avatar {
+				display: flex;
+				align-items: center;
+				cursor: pointer;
+				&-img {
+					margin-right: 8px;
+				}
+				&-icon {
+					display: flex;
+					align-items: center;
+					svg {
+						width: 11px;
+					}
+				}
+			}
+			&__dropdown {
+				min-width: 240px;
+				position: absolute;
+				right: 0;
+				top: 49px;
+				background: $bg-white-cl;
+				-webkit-box-shadow: 0px 9px 14px 0px rgba(0, 0, 0, 0.2);
+				-moz-box-shadow: 0px 9px 14px 0px rgba(0, 0, 0, 0.2);
+				box-shadow: 0px 9px 14px 0px rgba(0, 0, 0, 0.2);
+				opacity: 0;
+				pointer-events: none;
+				@include transition(0.2s);
+				&-info {
+					display: flex;
+					padding: 15px 17px;
+					border-bottom: 1px solid $grey-cl-v3;
+					margin-bottom: 10px;
+					.user__img {
+						flex-shrink: 0;
+						@include size(50px, 50px);
+						margin-right: 10px;
+					}
+					.title {
+						margin-bottom: 0;
+						line-height: normal;
+						padding-top: 4px;
+						white-space: nowrap;
+					}
+					.email {
+						color: $tcl-grey;
+						font-size: $fs-texts;
+					}
+					@include transition($t);
+					&:hover {
+						background: $grey-cl-v3;
+						@include transition($t);
+					}
+				}
+				&-list {
+					a {
+						padding: 9px 17px;
+						display: flex;
+						align-items: center;
+						justify-content: space-between;
+						@include transition($t);
+						&:hover {
+							background: $grey-cl-v3;
+							@include transition($t);
+						}
+						&:last-child {
+							i {
+								img {
+									width: 17px;
+								}
+							}
+						}
+					}
+				}
+				&.active {
+					opacity: 1;
+					pointer-events: auto;
+					@include transition(0.2s);
+				}
+			}
+		}
+		@include xs {
+			.noti {
+				position: initial;
+				&__list {
+					width: 100vw;
+					top: calc(#{$heightHeader} - 20px);
+				}
+			}
+		}
+	}
+	&.--bgwhite {
+		height: calc(#{$heightHeader} - 14px);
+		background: $bg-white-cl;
+		border-bottom: 1px solid $grey-cl-v3;
+		transition: opacity 0.3s, height 0.3s;
+		-webkit-transition: opacity 0.3s, height 0.3s;
+		.header__humburger {
+			&-button {
+				@include transition($t);
+				span {
+					background-color: $tcl-body;
+					@include transition($t);
+				}
+			}
+			&-text {
+				color: $tcl-body;
+				@include transition($t);
+			}
+		}
+		.header__logo {
+			img,
+			svg {
+				width: 230px;
+				@include transform(translateX(15px));
+				path {
+					fill: #000;
+					opacity: 0;
+					&#rect {
+						fill: #00afab;
+						opacity: 1;
+					}
+					&#ccenter{
+						opacity: 1;
+					}
+				}
+			}
+		}
+		.header__auth {
+			.btn--transparent {
+				color: $tcl-body;
+			}
+			.btn--border {
+				border: 1px solid $tcl-body;
+				color: $tcl-body;
+				&:hover {
+					border: 1px solid $main-cl;
+					color: $tcl-white;
+					@include transition($t);
+				}
+			}
+		}
+		.header__logged {
+			.noti {
+				svg {
+					* {
+						fill: $tcl-body;
+						@include transition(0.2s);
+					}
+				}
+			}
+			.userlogged {
+				i {
+					svg {
+						* {
+							fill: $tcl-body;
+							@include transition(0.2s);
+						}
+					}
+				}
+			}
+		}
+	}
+	@include xs {
+		height: calc(#{$heightHeader} - 20px);
+		&__logo {
+			img,
+			svg {
+				width: 140px;
+			}
+		}
+		&__logged {
+			.userlogged {
+				&__dropdown {
+					top: 41px;
+				}
+			}
+		}
+		&__auth {
+			.btn--transparent {
+				border: 0;
+				padding-top: 5px;
+				span {
+					&:first-child {
+						display: none;
+					}
+				}
+			}
+			.btn--border {
+				display: none;
+			}
+		}
+		&.--bgwhite {
+			height: calc(#{$heightHeader} - 26px);
+			.header__logo {
+				img,
+				svg {
+					width: 200px;
+					@include transform(translateX(6px));
+				}
+			}
+			.header__auth {
+				.btn--transparent {
+					@include transition($t);
+					&:hover {
+						@include transition($t);
+					}
+				}
+				.btn--border {
+					display: none;
+				}
+			}
+		}
+	}
+}

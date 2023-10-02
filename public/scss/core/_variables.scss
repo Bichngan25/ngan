@@ -1,0 +1,89 @@
+/* ------------------------------- Main Color ------------------------------- */
+$main-cl: #00afab;
+$main-cl-dark: #00c7c4;
+$main-cl-light: #e0f1f0;
+
+$white-cl: #fff;
+$black-cl: #000;
+$yellow-cl: #eac300;
+
+$light-cl: #f4f7f6;
+$light-cl-v1: #d2d2d2;
+$light-cl-v2: #e0e0e0;
+
+$grey-cl-v1: #858585;
+$grey-cl-v2: #bdbdbd;
+$grey-cl-v3: #e3e3e3;
+$grey-cl-v4: #f8f8f8;
+$dark-cl-rgba: rgba(27, 27, 27, 0.5);
+
+/* ------------------------------ Background Color ------------------------------ */
+
+$bg-main-cl: #f4f7f6;
+$bg-white-cl: #fff;
+$bg-black-cl: #1b1b1b;
+$bg-black-dark-cl: #0a0a0a;
+
+/* ------------------------------ Button Color ------------------------------ */
+$btn-primary: #00afab;
+$btn-primary-dark: #00c7c4;
+
+/* ------------------------------- Text Color ------------------------------- */
+$tcl-primary: #00afab;
+$tcl-white: #fff;
+$tcl-dark: #000;
+$tcl-grey: #858585;
+$tcl-body: #222222;
+$tcl-light: #f4f7f6;
+$tcl-light-v1: #f5f7f6;
+$tcl-light-v2: #f9f9f9;
+$tcl-red-cl: #dc1414;
+
+/* -------------------------------- Font Face ------------------------------- */
+$font-gr: "gr", sans-serif;
+$font-gb: "gb", sans-serif;
+$font-gm: "gm", sans-serif;
+$font-rm: "rm", sans-serif;
+
+/* -------------------------------- Font Size ------------------------------- */
+$fs-texts: 1.4rem;
+$fs-texts-up: 1.2rem;
+$fs-text: 1.7rem;
+$fs-text-up: 1.4rem;
+
+$fs-t1: 5.8rem;
+$fs-t2: 4rem;
+$fs-t2b: 2.9rem;
+$lh-t2b: calc(#{$fs-t2b} + 6px);
+$fs-t3: 2.1rem;
+$fs-t4: 1.8rem;
+
+/* --------------------------------- Border Radius --------------------------------- */
+$br: 4px;
+
+/* --------------------------------- Timing --------------------------------- */
+$t: 0.3s;
+$cubic: cubic-bezier(0.56, 0.2, 0.15, 0.9);
+
+/* ------------------------------- Font Style ------------------------------- */
+$lh-normal: calc(#{$fs-text} + 10px);
+
+/* ------------------------------ Boxed Layout ------------------------------ */
+$container-max-width: 100%;
+$container-width: 1510px;
+
+/* ------------------------------- Grid Media ------------------------------- */
+$xxs-min: 576px;
+$xs-min: 768px;
+$sm-min: 992px;
+$md-min: 1200px;
+$lg-min: 1560px;
+
+$xxs-max: ($xxs-min - 1); // Small Mobile
+$xs-max: ($xs-min - 1); // Mobile
+$sm-max: ($sm-min - 1); // Tablet
+$md-max: ($md-min - 1); // Desktop
+$lg-max: ($lg-min - 1); // Large Desktop
+
+/* ------------------------------- Variables General ------------------------------- */
+$heightHeader: 76px;

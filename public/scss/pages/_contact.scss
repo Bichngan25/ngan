@@ -1,0 +1,111 @@
+.contact {
+    padding-bottom: var(--pdSection);
+    &__content {
+        margin-top: 6rem;
+        .container {
+            max-width: 980px;
+        }
+        .wrapper {
+            display: grid;
+            grid-template-columns: calc(100% / 3) 1fr;
+        }
+        .sidebar {
+            padding-right: 4rem;
+            &__address {
+                .infor__item {
+                    padding-bottom: 4.4rem;
+                    .label {
+                        padding-bottom: 1.4rem;
+                    }
+                    .title {
+                        text-transform: none;
+                    }
+                }
+            }
+            &__business {
+                p {
+                    color: $tcl-grey;
+                }
+                a {
+                    @include text(null, $font-gb, 3.4rem, $tcl-primary);
+                }
+            }
+            &__messenger {
+                margin-top: 8rem;
+            }
+        }
+        .form {
+            background-color: $bg-white-cl;
+            padding: 6rem 4.8rem;
+            h3.title {
+                font-size: $fs-t2b;
+                line-height: $lh-t2b;
+                margin-bottom: 3rem;
+            }
+            .form-group {
+                textarea {
+                    resize: none;
+                }
+            }
+            .btncontrol {
+                text-align: center;
+                margin-top: 20px;
+                .btn {
+                    width: 100%;
+                }
+            }
+        }
+    }
+}
+
+@include sm {
+    .contact {
+        &__content {
+            margin-top: 5rem;
+        }
+    }
+}
+@include xs {
+    .contact {
+        &__content {
+            margin-top: 4rem;
+            .container {
+                .wrapper {
+                    grid-template-columns: 1fr;
+                    row-gap: 30px;
+                }
+                .sidebar {
+                    display: flex;
+                    flex-direction: column;
+                    padding-top: unset;
+                    padding-right: unset;
+                    &__address {
+                        display: flex;
+                        flex-direction: column;
+                        justify-content: center;
+                        align-items: center;
+                        .infor__item {
+                            text-align: center;
+                            padding-bottom: 2rem;
+                            .label {
+                                margin-bottom: 0.5rem;
+                            }
+                        }
+                    }
+                    &__business {
+                        text-align: center;
+                    }
+                    &__messenger {
+                        margin: 3rem auto;
+                    }
+                }
+                .form {
+                    padding: 15px;
+                    .title {
+                        margin: 15px 0;
+                    }
+                }
+            }
+        }
+    }
+}

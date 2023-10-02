@@ -1,0 +1,99 @@
+.privacypage {
+    padding-bottom: var(--pdSection);
+    .container {
+        max-width: 780px;
+        margin: 0 auto;
+    }
+    &__title {
+        margin-top: 40px;
+        margin-bottom: 40px;
+        text-align: center;
+    }
+    .content {
+        h2 {
+            &:after {
+                content: "";
+                display: block;
+                width: 60px;
+                height: 3px;
+                background: black;
+                margin-top: 15px;
+                margin-bottom: 30px;
+            }
+        }
+
+        p {
+            margin-bottom: 14px;
+        }
+        h1 {
+            font-size: 2em; /*32.0px*/
+            margin: 0.67em 0;
+            font-family: gb;
+        }
+        h2 {
+            font-size: 1.5em; /*24.0px*/
+            line-height: 3.2rem;
+            margin: 0.75em 0;
+            font-weight: bold;
+            font-family: gb;
+        }
+        h3 {
+            font-size: 1.3em; /*20.8px*/
+            margin: 0.83em 0;
+            font-family: gb;
+        }
+        h4 {
+            font-size: 1em; /*16.0px*/
+            font-family: gb;
+        }
+        h5 {
+            font-size: 0.8em; /*12.8px*/
+            margin: 1.5em 0;
+            font-family: gb;
+        }
+        h6 {
+            font-size: 0.7em; /*11.2px*/
+            margin: 1.67em 0;
+            font-family: gb;
+        }
+        ul,
+        ol {
+            list-style: initial;
+            margin: 1.12em 0 1.12em 1.2em;
+        }
+        p,
+        blockquote,
+        fieldset,
+        form,
+        dl,
+        dir,
+        menu {
+            display: block;
+            margin: 1.12em 0;
+        }
+        ul {
+            padding-left: 16px;
+            li {
+                padding: 4px 0;
+            }
+        }
+        .section {
+            background: $white-cl;
+            margin-bottom: 30px;
+            padding: 50px;
+        }
+    }
+
+    @include xs {
+        &__title {
+            margin-top: 30px;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+        .content {
+            .section {
+                padding: 25px;
+            }
+        }
+    }
+}

@@ -1,0 +1,202 @@
+@-ms-viewport {
+	width: device-width;
+}
+* {
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	font-smoothing: antialiased;
+	text-rendering: optimizeLegibility;
+	box-sizing: border-box;
+	appearance: none;
+	-moz-appearance: none;
+	-webkit-appearance: none;
+}
+html {
+	font-size: 62.5%;
+	--pdSection: 80px;
+	--smallContainer: 700px;
+	--midContainer: 980px;
+	@include sm {
+		font-size: 60%;
+	}
+}
+body {
+	width: 100%;
+	max-width: $container-max-width;
+	margin: auto;
+	@include text($fs-text, $font-gm, $lh-normal, $tcl-body, null);
+	background: $bg-main-cl;
+	scroll-behavior: smooth;
+	position: relative;
+	@include customscroll();
+	overflow-x: hidden;
+	::selection {
+		background: $main-cl;
+		color: #fff;
+	}
+	.container {
+		width: 100%;
+		padding-right: 15px;
+		padding-left: 15px;
+		margin-right: auto;
+		margin-left: auto;
+		&.small {
+			max-width: 980px;
+		}
+	}
+	.container-fluid {
+		width: 100%;
+		padding-right: 20px;
+		padding-left: 20px;
+		margin-right: auto;
+		margin-left: auto;
+		@include md {
+			padding-right: 15px;
+			padding-left: 15px;
+		}
+	}
+	.row {
+		display: -webkit-box;
+		display: -ms-flexbox;
+		display: flex;
+		-ms-flex-wrap: wrap;
+		flex-wrap: wrap;
+		margin-right: -15px;
+		margin-left: -15px;
+	}
+	.no-gutters {
+		margin-right: 0;
+		margin-left: 0;
+	}
+	.no-gap > .col,
+	.no-gap > [class*="col-"] {
+		padding-right: 0;
+		padding-left: 0;
+	}
+	.mainwrapper,
+	footer {
+		@include transform(translate(0%, 0%));
+		@include transition($t);
+	}
+	&.fixed {
+		height: 100vh;
+		overflow: hidden;
+	}
+	&.menu-show {
+		height: 100vh;
+		overflow: hidden;
+		@include transition($t);
+		.header {
+			&__humburger {
+				&-button {
+					span {
+						&:nth-child(1) {
+							@include transform(rotateZ(45deg) translate(5px, 4px));
+						}
+						&:nth-child(2) {
+							opacity: 0;
+							@include transform(translateY(-50%) scale(0));
+						}
+						&:nth-child(3) {
+							@include transform(rotateZ(-45deg) translate(7px, -6px));
+						}
+					}
+				}
+			}
+			&__logo,
+			&__auth,
+			&__logged {
+				opacity: 0.1;
+				pointer-events: none;
+				@include transition($t);
+			}
+			&.--bgwhite {
+				.header__logo,
+				.header__auth {
+					opacity: 1;
+				}
+			}
+		}
+		.mainwrapper,
+		footer {
+			@include transform(translate(10%, 0%));
+			@include transition($t);
+		}
+		.navbar {
+			@include transform(translate(0%, 0%));
+			@include transition($t);
+		}
+		.overlay {
+			opacity: 0.9;
+			pointer-events: auto;
+			@include transition($t);
+		}
+	}
+
+	@media (min-width: $xxs-min) {
+		.container {
+			max-width: 100%;
+		}
+	}
+	@media (min-width: $xs-min) {
+		.container {
+			max-width: 100%;
+		}
+	}
+	@media (min-width: $sm-min) {
+		.container {
+			max-width: 100%;
+		}
+	}
+	@media (min-width: $md-min) {
+		.container {
+			max-width: 100%;
+		}
+	}
+	@media (min-width: 1360px) {
+		.container {
+			max-width: 1330px;
+		}
+	}
+	@media (min-width: $lg-min) {
+		.container {
+			max-width: $container-width;
+		}
+	}
+
+	.mainwrapper {
+		width: 100%;
+		min-height: 600px;
+		margin: auto;
+		@include visible;
+		&.--ptop {
+			padding-top: 62px;
+		}
+		@include xs {
+			&.--ptop {
+				padding-top: 50px;
+			}
+		}
+	}
+	section {
+		position: relative;
+	}
+	.--scpadding {
+		padding: var(--pdSection) 0;
+	}
+	@include lg {
+		// CSS responsive large desktop
+		--pdSection: 70px;
+	}
+	@include md {
+		// CSS responsive desktop
+	}
+	@include sm {
+		// CSS responsive tablet
+		--pdSection: 60px;
+	}
+	@include xs {
+		// CSS responsive mobile
+		--pdSection: 56px;
+	}
+}

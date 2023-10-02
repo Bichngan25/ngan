@@ -1,0 +1,28 @@
+/* Core variables and mixins*/
+@import "core/reset";
+@import "core/variables";
+@import "core/mixins";
+@import "core/layouts";
+@import "core/elements";
+@import "core/components";
+@import "core/libs";
+@import "core/loading";
+
+/* Navigation, header, footer*/
+@import "core/header";
+@import "core/nav";
+@import "core/footer";
+
+/* Pages*/
+@import "pages/home";
+@import "pages/courses";
+@import "pages/profile";
+@import "pages/detail";
+@import "pages/student";
+@import "pages/about";
+@import "pages/contact";
+@import "pages/blog";
+@import "pages/blog-detail";
+@import "pages/order";
+@import "pages/notfound";
+@import "pages/privacy";

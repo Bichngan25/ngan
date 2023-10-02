@@ -1,0 +1,220 @@
+.profilepage {
+	padding-top: calc(#{$heightHeader} + 15px);
+	padding-bottom: var(--pdSection);
+	.wrapper {
+		display: grid;
+		grid-template-columns: calc(100% / 3) 1fr;
+	}
+	.sidebar {
+		height: fit-content;
+		background-color: $bg-white-cl;
+		padding: 30px;
+		overflow: hidden;
+		&__info {
+			display: flex;
+			align-items: center;
+			flex-direction: column;
+			border-bottom: 1px solid $light-cl-v1;
+			padding-bottom: 14px;
+			margin-bottom: 14px;
+			ul {
+				margin-top: 10px;
+				display: flex;
+				flex-direction: column;
+				width: 100%;
+				li {
+					display: flex;
+					justify-content: space-between;
+					padding: 10px 0;
+					span {
+						@include text($fs-text, $font-gm);
+					}
+				}
+			}
+		}
+		&__content {
+			margin-top: 26px;
+			h4 {
+				@include text($fs-text, $font-gb);
+			}
+			.description {
+				margin-top: 10px;
+				margin-bottom: 20px;
+				@include text($fs-text, $font-gm, 28px);
+			}
+			ul {
+				display: flex;
+				flex-direction: column;
+				align-items: flex-start;
+				li {
+					display: flex;
+					margin: 7px 0;
+					img {
+						margin-right: 15px;
+						position: relative;
+						top: -2px;
+					}
+					a {
+						font-size: $fs-text;
+					}
+					span {
+						@include overtext(1);
+						@include text($fs-text, $font-gm);
+					}
+				}
+			}
+			.social {
+				display: flex;
+				justify-content: center;
+				align-items: center;
+				margin-top: 45px;
+				a {
+					padding: 0 7px;
+				}
+			}
+			.label {
+				text-align: center;
+				margin-top: 20px;
+			}
+		}
+	}
+	.tab {
+		padding-left: 30px;
+		&__content {
+			margin-top: 30px;
+		}
+		.form {
+			padding-top: 35px;
+			.form-container {
+				&.textarea {
+					margin: 15px 0;
+				}
+			}
+		}
+		.btnsubmit {
+			margin-top: 15px;
+			.btn--primary {
+				width: 100%;
+			}
+		}
+		.teacher__infor {
+			img {
+				height: auto;
+				display: block;
+				margin: 25px auto;
+			}
+			h1 {
+				font-size: 2em; /*32.0px*/
+				margin: 0.67em 0;
+				font-family: gb;
+			}
+			h2 {
+				font-size: 1.5em; /*24.0px*/
+				margin: 0.75em 0;
+				font-weight: bold;
+				font-family: gb;
+			}
+			h3 {
+				font-size: 1.3em; /*20.8px*/
+				margin: 0.83em 0;
+				font-family: gb;
+			}
+			h4 {
+				font-size: 1em; /*16.0px*/
+				font-family: gb;
+			}
+			h5 {
+				font-size: 0.8em; /*12.8px*/
+				margin: 1.5em 0;
+				font-family: gb;
+			}
+			h6 {
+				font-size: 0.7em; /*11.2px*/
+				margin: 1.67em 0;
+				font-family: gb;
+			}
+			ul,
+			ol {
+				list-style: initial;
+				margin: 1.12em 0 1.12em 1.2em;
+				li {
+					padding: 4px 0;
+				}
+			}
+			p,
+			blockquote,
+			fieldset,
+			form,
+			dl,
+			menu,
+			dir {
+				display: block;
+				margin: 1.12em 0;
+			}
+		}
+	}
+	@include sm {
+		.sidebar {
+			padding: 40px 15px;
+		}
+	}
+	@include xs {
+		.wrapper {
+			grid-template-columns: 1fr;
+		}
+		.sidebar {
+			width: 100%;
+			padding: 20px 0 0 0;
+			background: none;
+			.listinfo {
+				display: none;
+			}
+			&__info {
+				padding-bottom: 8px;
+			}
+			&__content {
+				display: none;
+			}
+		}
+		.tabwrap {
+			margin-top: 0px;
+		}
+		.tab {
+			width: 100%;
+			padding-left: 0;
+			&__content {
+				margin-top: 15px;
+			}
+			.form {
+				padding-top: 10px;
+			}
+		}
+	}
+}
+.changepassword {
+	padding-top: calc(90px + 30px);
+	padding-bottom: var(--pdSection);
+	.form {
+		max-width: 400px;
+		background-color: $bg-white-cl;
+		padding: 6rem 4.8rem;
+		margin: auto;
+		h3.title {
+			margin-top: 0;
+			margin-bottom: 3rem;
+			text-align: center;
+		}
+		.btncontrol {
+			text-align: center;
+			margin-top: 3.4rem;
+			a.btn {
+				width: 100%;
+			}
+		}
+	}
+	@include xs {
+		.form {
+			padding: 30px;
+		}
+	}
+}

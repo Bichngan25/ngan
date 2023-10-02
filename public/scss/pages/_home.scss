@@ -1,0 +1,1172 @@
+/* --------------------------------Banner----------------------------------- */
+.hero {
+	position: relative;
+	--heightBanner: 670px;
+	@include size(100%, var(--heightBanner));
+	overflow: hidden;
+	&::before {
+		content: "";
+		position: absolute;
+		top: 0;
+		left: 0;
+		right: 0;
+		bottom: 0;
+		background: linear-gradient(180deg, rgba(0, 0, 0, 0.7) 0%, rgba(0, 0, 0, 0.3) 100%);
+		z-index: 100;
+	}
+	&::after {
+		content: "";
+		position: absolute;
+		top: 0;
+		left: 0;
+		right: 0;
+		bottom: 0;
+		background: rgba(0, 0, 0, 0.5);
+		z-index: 50;
+	}
+	&__content {
+		position: relative;
+		z-index: 100;
+		height: 100%;
+		text-align: center;
+		@include mid(true);
+		.text {
+			margin: 20px 0 35px 0;
+			@include text(2.4rem, $font-gr, normal, $tcl-white, null);
+		}
+		.btn {
+			min-width: 200px;
+		}
+	}
+
+	&__bottom {
+		width: 100%;
+		position: absolute;
+		bottom: 0;
+		left: 0;
+		z-index: 120;
+		&-social {
+			position: relative;
+			display: flex;
+			align-items: center;
+			z-index: 100;
+			padding: 25px 0;
+			a {
+				padding-right: 20px;
+				img {
+					width: 26px;
+				}
+				&:last-child {
+					position: relative;
+					&::before {
+						content: "";
+						left: 100%;
+						@include positionAlign(top);
+						@include size(45px, 2px);
+						background-color: $bg-white-cl;
+					}
+				}
+			}
+		}
+	}
+	&__background {
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+		z-index: 0;
+		img,
+		video {
+			min-width: 100%;
+			min-height: 100%;
+			object-fit: cover;
+			@include midimg(100%);
+			z-index: 0;
+		}
+		&-video {
+			min-width: 100%;
+			min-height: 100%;
+			object-fit: cover;
+			@include midimg;
+			z-index: 10;
+		}
+	}
+	@include md {
+		--heightBanner: 680px;
+	}
+	@include xs {
+		--heightBanner: 480px;
+		&__content {
+			.text {
+				margin: 15px 0 25px 0;
+				font-size: 2.2rem;
+				line-height: 3rem;
+			}
+		}
+		&__bottom {
+			&-social {
+				a {
+					padding-right: 15px;
+					img {
+						width: 24px;
+					}
+					&:last-child {
+						&::before {
+							@include size(30px, 1px);
+						}
+					}
+				}
+			}
+		}
+	}
+}
+/* ------------------------------Course Coming--------------------------------------- */
+.coursecoming {
+	--pdItem: 60px;
+	&__list {
+		width: 100%;
+		max-width: 1920px;
+		margin: auto;
+		overflow: hidden;
+		outline: 0;
+	}
+	&__item {
+		width: 100%;
+		display: grid;
+		grid-template-columns: 968px 1fr;
+		&-img {
+			overflow: hidden;
+			position: relative;
+			a {
+				width: 100%;
+				height: 100%;
+				display: block;
+				overflow: hidden;
+			}
+		}
+		&-content {
+			width: 100%;
+			padding: var(--pdItem) calc(var(--pdItem) - 10px);
+			background-color: $bg-white-cl;
+			.category {
+				display: inline-block;
+				margin-bottom: 15px;
+			}
+			> .title {
+				width: 100%;
+				@include overtext(2);
+				margin-bottom: 20px;
+				@include transition($t);
+				&:hover {
+					opacity: 0.7;
+					@include transition($t);
+				}
+			}
+			.user {
+				margin-bottom: 40px;
+			}
+			.info {
+				display: flex;
+				margin-bottom: 40px;
+				.labeltext {
+					.title {
+						font-size: $fs-t2b;
+						line-height: $lh-t2b;
+						color: $grey-cl-v2;
+						margin-top: 14px;
+					}
+					&:first-child {
+						margin-right: 40px;
+					}
+				}
+			}
+			.btnwrap {
+				display: flex;
+				.btn {
+					width: 160px;
+					&.btn--primary {
+						margin-right: 12px;
+					}
+				}
+			}
+		}
+	}
+	@include maxW(1920px) {
+		&__item {
+			width: calc(100% - 120px);
+			grid-template-columns: 780px 1fr;
+			margin-right: 35px;
+		}
+	}
+	@include lg {
+		&__item {
+			width: calc(100% - 80px);
+		}
+	}
+	@include md {
+		--pdItem: 45px;
+		&__item {
+			width: calc(100% - 100px);
+			margin-right: 30px;
+			grid-template-columns: 1fr;
+		}
+	}
+	@include sm {
+		--pdItem: 40px;
+		&__item {
+			&-content {
+				.category {
+					margin-bottom: 0px;
+				}
+				.title {
+					margin-top: 10px;
+				}
+				.user {
+					margin-bottom: 30px;
+				}
+				.info {
+					margin-bottom: 20px;
+					.labeltext {
+						.title {
+							font-size: 3rem;
+							margin-top: 0;
+						}
+						&:first-child {
+							margin-right: 25px;
+						}
+					}
+				}
+			}
+		}
+	}
+	@include xs {
+		--pdItem: 20px;
+		.heading {
+			justify-content: center;
+		}
+		&__item {
+			width: calc(100% - 40px);
+			margin-right: 15px;
+			&-content {
+				padding: var(--pdItem);
+				> .title {
+					height: 42px;
+					line-height: calc(#{$fs-t2} - 0.5rem + 15px);
+					margin-top: 0px;
+					margin-bottom: 10px;
+				}
+				.user {
+					margin-bottom: 30px;
+				}
+				.info {
+					margin-bottom: 20px;
+					.labeltext {
+						.title {
+							font-size: $fs-t3;
+							line-height: normal;
+						}
+					}
+				}
+				.btnwrap {
+					.btn {
+						width: 50%;
+					}
+				}
+			}
+		}
+	}
+}
+/* ------------------------------Course List------------------------------- */
+.courses {
+	padding-bottom: var(--pdSection);
+	&__category {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		li {
+			a {
+				white-space: nowrap;
+				padding: 15px 13px;
+				@include transition(all $t);
+				&.active {
+					color: $btn-primary;
+					@include transition(all $t);
+				}
+				&:hover {
+					opacity: 0.5;
+					@include transition(all $t);
+				}
+			}
+			&:last-child {
+				a {
+					padding-right: 0;
+				}
+			}
+		}
+	}
+	&__list {
+		display: flex;
+		flex-wrap: wrap;
+		margin-left: -15px;
+		margin-right: -15px;
+		&-item {
+			position: relative;
+			width: calc(100% / 2);
+			padding: 0 15px;
+			overflow: hidden;
+			margin-bottom: 30px;
+			.img {
+				position: relative;
+				height: 0;
+				padding-bottom: 60%;
+				overflow: hidden;
+				@include transition($t);
+				&:before {
+					content: "";
+					width: 100%;
+					height: 100%;
+					position: absolute;
+					top: 0;
+					left: 0;
+					background: rgba($color: #000000, $alpha: 0);
+					z-index: 10;
+					pointer-events: none;
+					@include transition($t $cubic);
+				}
+				img {
+					@include midimg(100%);
+					// @include transition($t $cubic);
+				}
+				.badge {
+					position: absolute;
+					right: 15px;
+					bottom: 15px;
+					z-index: 15;
+					@include transition($t $cubic);
+					&.--status {
+						right: initial;
+						left: 15px;
+					}
+				}
+				&:hover {
+					&:before {
+						background: rgba($color: #000000, $alpha: 0.2);
+						@include transition($t $cubic);
+					}
+					img {
+						// @include transform(translate(-50%, -50%) scale(1.06));
+						// @include transition($t $cubic);
+					}
+				}
+			}
+			.content {
+				padding: 20px 25px 30px 25px;
+				background-color: $bg-white-cl;
+				overflow: hidden;
+				@include transition($t);
+				.label {
+					margin-bottom: 10px;
+					display: inline-block;
+				}
+				.title {
+					height: 80px;
+					@include transition($t);
+					a {
+						color: inherit;
+						@include overtext(2);
+					}
+					&:hover {
+						opacity: 0.6;
+						@include transition($t);
+					}
+				}
+				.date {
+					font-size: $fs-texts;
+					line-height: normal;
+					color: $tcl-grey;
+				}
+				&__info {
+					display: flex;
+					justify-content: space-between;
+					align-items: center;
+					margin-top: 10px;
+					margin-bottom: -10px;
+					.price {
+						margin-bottom: -1px;
+						text-align: right;
+						&__original {
+							text-decoration: line-through;
+						}
+						&__discount {
+							margin-left: 6px;
+						}
+					}
+				}
+				&__action {
+					display: flex;
+					justify-content: space-between;
+					align-items: stretch;
+					margin-top: 38px;
+					@include transition($t);
+					display: none;
+					.btn--primary {
+						width: 100%;
+						text-align: center;
+						margin-right: 10px;
+						@include br(2px);
+					}
+					.btn--default {
+						background: $grey-cl-v3;
+						@include br(2px);
+						flex-shrink: 0;
+						@include transition($t);
+						img {
+							width: 22px;
+						}
+						&:hover {
+							background: $grey-cl-v4;
+						}
+					}
+				}
+			}
+			&:hover {
+				.course {
+					&__wrapper {
+						@include transition($t);
+					}
+				}
+			}
+		}
+	}
+	&__btnall {
+		margin-top: 30px;
+		text-align: center;
+		@include br(2px);
+	}
+	@include sm {
+		.heading {
+			flex-direction: column;
+			&__title {
+				margin-bottom: 15px;
+				padding-left: 0;
+				&:before {
+					display: none;
+				}
+			}
+		}
+		&__list {
+			&-item {
+				.img {
+					.badge {
+						right: 10px;
+						bottom: 10px;
+					}
+				}
+				.content {
+					padding: 15px;
+					.title {
+						a {
+							@include overtext(3);
+						}
+					}
+					&__info {
+						margin-bottom: 0;
+					}
+				}
+			}
+		}
+		&__btnall {
+			margin-top: 15px;
+		}
+	}
+	@include xs {
+		&__category {
+			width: 100%;
+			overflow-x: scroll;
+			margin-left: -15px;
+			margin-right: -15px;
+			text-align: center;
+			li {
+				a {
+					padding: 0px 10px;
+				}
+				&:first-child {
+					a {
+						padding-left: 0;
+					}
+				}
+			}
+		}
+		&__list {
+			&-item {
+				width: 100%;
+				margin-bottom: 15px;
+				.content {
+					.label {
+						margin-bottom: 5px;
+					}
+					.title {
+						height: 70px;
+					}
+				}
+			}
+		}
+	}
+	@include maxW(400px) {
+		&__category {
+			li {
+				a {
+					padding: 0px 7px;
+				}
+			}
+		}
+	}
+}
+/* -------------------------------Teach Feature--------------------------------- */
+.teacher {
+	background-color: $bg-white-cl;
+	.heading {
+		flex-direction: column;
+		align-items: flex-start;
+		&__wrapper {
+			width: 100%;
+			display: flex;
+			padding-left: 100px;
+			justify-content: space-between;
+			align-items: flex-end;
+			.heading__desc {
+				max-width: 680px;
+			}
+		}
+	}
+	&__list {
+		width: 100%;
+		outline: 0;
+		margin-left: -7.5px;
+		margin-right: -7.5px;
+		&-inner {
+			padding-left: 100px;
+		}
+		.flickity-viewport {
+			overflow: hidden;
+		}
+		&-item {
+			width: calc(100% / 5);
+			padding: 0 7.5px;
+			.img {
+				width: 100%;
+				height: 0;
+				position: relative;
+				padding-bottom: 140%;
+				overflow: hidden;
+				&:before {
+					content: "";
+					width: 100%;
+					height: 100%;
+					position: absolute;
+					top: 0;
+					left: 0;
+					background: rgba($color: #000000, $alpha: 0);
+					z-index: 10;
+					pointer-events: none;
+					@include transition($t $cubic);
+				}
+				img {
+					@include midimg(100%);
+					@include transition($t $cubic);
+				}
+				&:hover {
+					&:before {
+						background: rgba($color: #000000, $alpha: 0.2);
+						@include transition($t $cubic);
+					}
+					img {
+						@include transform(translate(-50%, -50%) scale(1.06));
+						@include transition($t $cubic);
+					}
+				}
+			}
+			.info {
+				margin-top: 30px;
+				.title {
+					&:hover {
+						@include transition($t);
+						opacity: 0.7;
+					}
+				}
+				.label {
+					margin-bottom: 12px;
+				}
+			}
+		}
+	}
+	@include md {
+		&__list {
+			&-item {
+				width: calc(100% / 4);
+				.info {
+					.label {
+						@include overtext(1);
+						margin-bottom: 5px;
+					}
+				}
+			}
+		}
+	}
+	@include sm {
+		&__list {
+			&-item {
+				width: calc(100% / 3);
+			}
+		}
+	}
+	@include xs {
+		.heading {
+			&__wrapper {
+				padding-left: 0;
+			}
+		}
+		&__list {
+			padding-left: 0;
+			margin-left: -15px;
+			margin-right: -15px;
+			&-inner {
+				width: 100vw;
+				padding-left: 0;
+			}
+			&-item {
+				width: calc(100% / 2 - 15px);
+				padding: 0 0px 0 15px;
+				.info {
+					margin-top: 20px;
+					.label {
+						margin-bottom: 2px;
+					}
+				}
+			}
+		}
+	}
+}
+/* ---------------------------------Featured-------------------------------- */
+.featured {
+	background: $bg-black-cl;
+	position: relative;
+	overflow: hidden;
+	color: $tcl-white;
+	padding: 90px 0;
+	&__c {
+		height: 100%;
+		max-height: 710px;
+		position: absolute;
+		left: 0px;
+		top: 50%;
+		transform: translateY(-50%);
+	}
+	.container {
+		height: 100%;
+		display: flex;
+		align-items: center;
+	}
+	&__title {
+		width: 50%;
+		height: 100%;
+		padding-left: 240px;
+		display: flex;
+		align-items: center;
+		.title {
+			span {
+				color: $main-cl;
+			}
+		}
+	}
+	&__content {
+		width: 50%;
+		height: 100%;
+		padding-left: 60px;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		flex-direction: column;
+		&-item {
+			width: 100%;
+			&:not(:last-child) {
+				padding-bottom: 22px;
+				margin-bottom: 25px;
+				border-bottom: 1px solid rgb(48, 48, 48);
+			}
+			.title {
+				margin-bottom: 12px;
+				position: relative;
+				text-transform: initial;
+				&:before {
+					content: "";
+					width: 40px;
+					height: 40px;
+					background: url(../img/checked.svg) no-repeat center;
+					display: inline-block;
+					position: absolute;
+					left: -60px;
+					top: -5px;
+				}
+			}
+			p {
+				opacity: 0.6;
+			}
+		}
+	}
+	@include maxW(1820px) {
+		&__c {
+			left: -70px;
+		}
+		&__title {
+			padding-left: 270px;
+		}
+	}
+	@include maxW(1400px) {
+		&__title {
+			padding-left: 270px;
+		}
+	}
+	@include maxW(1370px) {
+		&__c {
+			left: -120px;
+		}
+		&__title {
+			padding-left: 240px;
+		}
+	}
+	@include md {
+		&__c {
+			left: -200px;
+		}
+		&__title {
+			padding-left: 190px;
+		}
+	}
+	@include sm {
+		padding: 80px 0;
+		.container {
+			flex-direction: column;
+		}
+		&__c {
+			height: 60%;
+			left: -95px;
+			top: 50%;
+			@include transform(translateY(-50%));
+		}
+		&__title {
+			width: 100%;
+			padding-left: 0;
+			margin-bottom: 50px;
+			padding-left: 185px;
+		}
+		&__content {
+			width: 100%;
+			padding-left: 240px;
+		}
+	}
+	@include xs {
+		padding: 70px 0;
+		&__c {
+			height: 230px;
+			left: -30px;
+			top: -12px;
+			@include transform(initial);
+			display: none;
+		}
+		&__title {
+			// padding-left: 110px;
+			padding-left: 0;
+			margin-bottom: 40px;
+			br {
+				display: block;
+			}
+		}
+		&__content {
+			width: 100%;
+			padding-top: 0px;
+			// padding-left: 110px;
+			padding-left: 45px;
+			text-align: justify;
+			&-item {
+				.title {
+					&:before {
+						left: -50px;
+					}
+				}
+			}
+		}
+	}
+}
+/* ---------------------------------Testimonial-------------------------------- */
+.testimonial {
+	--height_tes: 460px;
+	--positionCtr: -105px;
+	background: $bg-black-dark-cl;
+	&__inner {
+		max-width: 900px;
+		margin: 0 auto;
+	}
+	.heading {
+		&__title {
+			white-space: nowrap;
+		}
+		.control {
+			margin-right: -15px;
+		}
+	}
+	&__slider {
+		max-width: 900px;
+		margin: 0 auto;
+		&-list {
+			position: relative;
+			.item {
+				height: 100%;
+				display: flex;
+				align-items: center;
+				.text {
+					width: 570px;
+					height: calc(var(--height_tes) - 130px);
+					background: $bg-black-cl;
+					margin-right: -50px;
+					color: $tcl-white;
+					@include br($br);
+					position: relative;
+					z-index: 10;
+				}
+				.ct,
+				.ct_m {
+					width: 100%;
+					height: 100%;
+					position: absolute;
+					top: 0;
+					left: 0;
+					padding: 40px;
+					display: flex;
+					flex-direction: column;
+					justify-content: space-between;
+					@include visible(0);
+					@include transition($t);
+					&.active {
+						@include visible;
+						@include transition($t);
+					}
+					.info {
+						display: flex;
+						justify-content: space-between;
+						margin-bottom: 10px;
+						h4 {
+							font-size: 22px;
+							line-height: 32px;
+							margin-bottom: 8px;
+						}
+					}
+					.content {
+						height: 170px;
+						line-height: 28px;
+						margin-bottom: 15px;
+						@include overtext(6);
+					}
+					.bottom {
+						display: flex;
+						justify-content: space-between;
+						a {
+							img {
+								width: 18px;
+								position: relative;
+								left: -4px;
+								opacity: 0.55;
+								@include transition($t);
+							}
+							&:hover {
+								img {
+									opacity: 1;
+									@include transition($t);
+								}
+							}
+						}
+					}
+				}
+				.ct_m {
+					display: none;
+				}
+				.images {
+					width: 400px;
+					height: var(--height_tes);
+					overflow: hidden;
+					position: relative;
+					cursor: grab;
+					.img {
+						overflow: hidden;
+					}
+					.carousel-cell {
+						width: 100%;
+						height: var(--height_tes);
+						overflow: hidden;
+						margin: 0;
+						picture {
+							img {
+								min-width: 100%;
+								min-height: 100%;
+								object-fit: cover;
+							}
+						}
+					}
+				}
+			}
+			.dots {
+				margin-top: 40px;
+				.flickity-page-dots {
+					text-align: center;
+					display: flex;
+					align-items: center;
+					justify-content: center;
+					li {
+						width: 5px;
+						height: 5px;
+						display: inline-block;
+						margin: 0 5px;
+						@include br(50%);
+						background: #505050;
+						cursor: pointer;
+						@include transition($t);
+						&.is-selected {
+							width: 20px;
+							@include br(5px);
+							background: $white-cl;
+							@include transition($t);
+						}
+					}
+				}
+			}
+		}
+	}
+	@include md {
+		.testimonial__slider {
+			.testimonial__slider-list {
+				.item {
+					.ct,
+					.ct_m {
+						padding: 40px;
+					}
+				}
+				.btn_ctr {
+					&.prev {
+						left: 0;
+						top: initial;
+						bottom: -30px;
+					}
+					&.next {
+						left: 70px;
+						right: initial;
+						top: initial;
+						bottom: -30px;
+					}
+				}
+			}
+		}
+	}
+	@include xs {
+		.heading {
+			justify-content: center;
+		}
+		.testimonial__slider {
+			.testimonial__slider-list {
+				.item {
+					margin-left: -15px;
+					margin-right: -15px;
+					flex-direction: column-reverse;
+					.images {
+						.img {
+							height: 300px;
+						}
+					}
+					.text {
+						width: 100%;
+						height: 420px;
+						margin-right: 0;
+						display: none;
+					}
+					.ct_m {
+						width: 100%;
+						height: 380px;
+						background: $bg-black-cl;
+						position: relative;
+						display: flex;
+						padding: 25px;
+						color: $tcl-white;
+						z-index: 10;
+						@include visible;
+						.info {
+							.quotes {
+								margin-top: 5px;
+								display: none;
+								img {
+									width: 34px;
+								}
+							}
+						}
+						.content {
+							height: 220px;
+							@include overtext(10);
+						}
+					}
+					.images {
+						width: 100%;
+						height: auto;
+						.list {
+							.carousel-cell {
+								width: calc(100% - 60px);
+								height: auto;
+								padding: 0 0 0 15px;
+							}
+						}
+					}
+				}
+				.btn_ctr {
+					display: none;
+				}
+			}
+		}
+	}
+}
+
+/* ---------------------------------FAQ-------------------------------- */
+
+.faq {
+	padding-bottom: 0;
+	&__inner {
+		max-width: 700px;
+		margin: 0 auto;
+	}
+	.heading {
+		margin-bottom: 50px;
+	}
+}
+
+.gallery {
+	--sizeCtr: 38px;
+	--positionCtr: 0px;
+	padding-bottom: 30px;
+	overflow: hidden;
+	.list {
+		margin-top: 60px;
+		cursor: -webkit-grab;
+		img {
+			max-width: initial;
+			height: 480px;
+			opacity: 0;
+			transition: opacity 0.3s;
+			-webkit-transition: opacity 0.3s;
+			margin: 0 15px;
+
+			&.flickity-lazyloaded {
+				opacity: 1;
+				transition: opacity 0.3s;
+				-webkit-transition: opacity 0.3s;
+			}
+		}
+	}
+	.controls {
+		width: 220px;
+		margin: 40px auto 0 auto;
+		text-align: center;
+		display: none;
+		span {
+			font-size: 12px;
+			text-transform: uppercase;
+			letter-spacing: 3px;
+		}
+		.timeline {
+			height: 3px;
+			flex: 1;
+			background: #d8d8d8;
+			border-radius: 10px;
+			margin: 5px 15px;
+			position: relative;
+			overflow: hidden;
+
+			.process {
+				width: 10px;
+				height: 100%;
+				background: $main-cl;
+				position: absolute;
+				left: 0;
+			}
+		}
+	}
+	@include lg {
+		.list {
+			img {
+				height: 430px;
+			}
+		}
+	}
+	@include md {
+		.list {
+			img {
+				height: 380px;
+			}
+		}
+	}
+	@include xs {
+		padding-bottom: 16px;
+		.list {
+			margin-top: 40px;
+			img {
+				height: 260px;
+				margin: 0 8px;
+			}
+		}
+	}
+}
+/* ---------------------------------Call to action-------------------------------- */
+
+.callregister {
+	background: url(../img/hoc-vien-cfd-circle.jpg) no-repeat center;
+	background-size: cover;
+	position: relative;
+	padding: 160px 0;
+	&__content {
+		max-width: 710px;
+		margin: 0 auto;
+		text-align: center;
+		position: relative;
+		z-index: 10;
+		p {
+			margin: 10px 0 30px 0;
+			opacity: 0.7;
+		}
+		.btn {
+			min-width: 200px;
+			margin: 0 5px;
+		}
+	}
+	&:after {
+		content: "";
+		width: 100%;
+		height: 100%;
+		position: absolute;
+		top: 0;
+		left: 0;
+		z-index: 0;
+		background: rgb(255, 255, 255);
+		background: linear-gradient(0deg, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 0.711922268907563) 100%);
+	}
+	@include lg {
+		padding: 80px 0;
+	}
+	@include xs {
+		padding: 50px 0;
+		.title {
+			span {
+				display: block;
+			}
+		}
+		.btn--primary {
+			margin-bottom: 15px;
+		}
+	}
+}

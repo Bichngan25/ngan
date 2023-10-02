@@ -1,0 +1,139 @@
+.sccourseorder {
+    padding: 30px 0 var(--pdSection) 0;
+    .container {
+        &.small {
+            max-width: 800px;
+        }
+    }
+    .itemorder {
+        margin-bottom: 45px;
+        .title {
+            margin-bottom: 20px;
+        }
+        .boxorder {
+            background-color: $white-cl;
+            padding: 35px;
+        }
+        &.infoorder {
+            .boxorder {
+                display: flex;
+                justify-content: space-between;
+                &__col {
+                    .label {
+                        margin-bottom: 15px;
+                    }
+                    &-course {
+                        width: 340px;
+                        display: flex;
+                        flex-shrink: 0;
+                        .img {
+                            width: 140px;
+                            height: 88px;
+                            flex-shrink: 0;
+                            position: relative;
+                            overflow: hidden;
+                            margin-right: 15px;
+                            img {
+                                @include midimg(100%);
+                            }
+                        }
+                        .info {
+                            line-height: 21px;
+                            .name {
+                                margin-bottom: 8px;
+                                font-size: $fs-t4;
+                            }
+                        }
+                    }
+                    &:last-child {
+                        strong {
+                            color: $tcl-red-cl;
+                        }
+                    }
+                }
+            }
+        }
+        &.formorder {
+            .boxorder {
+                padding-top: 20px;
+                padding-bottom: 20px;
+            }
+        }
+        &.paymentorder {
+            margin-bottom: 0px;
+            .boxorder {
+                padding-top: 20px;
+                padding-bottom: 20px;
+                &__pay {
+                    margin: 15px 0;
+                    &-tooltip {
+                        background: $light-cl-v2;
+                        font-size: $fs-texts;
+                        color: $tcl-grey;
+                        line-height: 1.8rem;
+                        padding: 15px;
+                        margin-top: 10px;
+                        margin-bottom: 10px;
+                        position: relative;
+                        display: none;
+                        &::after {
+                            content: "";
+                            width: 22px;
+                            height: 16px;
+                            background: url(../img/up-arrow.svg) no-repeat center;
+                            position: absolute;
+                            top: -11px;
+                            left: 35px;
+                        }
+                    }
+                }
+            }
+        }
+    }
+    .btn--primary {
+        width: 100%;
+        @include transition($t);
+    }
+    @include sm {
+        padding: 25px 0 var(--pdSection) 0;
+        .itemorder {
+            .boxorder {
+                padding: 20px 15px;
+            }
+            &.infoorder {
+                .boxorder {
+                    flex-direction: column;
+                    &__col {
+                        .label {
+                            margin-bottom: 15px;
+                        }
+                        &-course {
+                            width: 100%;
+                            .img {
+                                width: 120px;
+                                height: 70px;
+                            }
+                        }
+                        &:not(:first-child) {
+                            margin-top: 20px;
+                            width: 100%;
+                            display: flex;
+                            align-items: center;
+                            justify-content: space-between;
+                            .label {
+                                margin-bottom: 0;
+                            }
+                        }
+                    }
+                }
+            }
+            &.formorder,
+            &.paymentorder {
+                .boxorder {
+                    padding-top: 10px;
+                    padding-bottom: 10px;
+                }
+            }
+        }
+    }
+}

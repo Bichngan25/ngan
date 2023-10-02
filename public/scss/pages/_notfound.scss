@@ -1,0 +1,23 @@
+.notfoundpage {
+    section {
+        .container {
+            height: calc(100vh - #{$heightHeader} - 350px);
+            min-height: 500px;
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            padding-top: 30px;
+        }
+        p {
+            margin: 10px 0 30px 0;
+            font-size: $fs-t3;
+        }
+        @include xs {
+            .container {
+                min-height: 400px;
+            }
+        }
+    }
+}
