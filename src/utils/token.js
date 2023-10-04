@@ -44,16 +44,16 @@ export const cookieToken = {
 // ================= goi ham =================
 const tokenMethod = {
     get:() =>{
-        // return localToken.get();
-        return cookieToken.get()
+        return localToken.get();
+        // return cookieToken.get()
     },
     set: (token) =>{
-        // return localToken.set(token)
-        return cookieToken.set(token)
+        return localToken.set(token)
+        // return cookieToken.set(token)
     },
     remove: () =>{
-        // return localToken.remove()
-        return cookieToken.remove()
+        return localToken.remove()
+        // return cookieToken.remove()
     }
 }
 export default tokenMethod
