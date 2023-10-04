@@ -44,8 +44,8 @@ function App() {
             
             {/* ======== PRIVATEROUTE ======== */}
             {/* dung privateRoute de chan vao cac trang k the vao truc tiep maf phai dang nhap hay lam 1 hanh dong nao do vi du nhu trang profile */}
-            <Route element={<PrivateRoute/>}>
-              {/* <Route path={PATHS.COURSE.ORDER} element={<CourseOderPage/>} /> */}
+            <Route element={<PrivateRoute redirectPath={PATHS.HOME}/>}>
+              <Route path={PATHS.COURSE.ORDER} element={<CourseOderPage/>} />
               <Route path={PATHS.PROFILE.INDEX} element={<ProfilePage/>}>
                 <Route index element={<MyInfo />} />
                 <Route path={PATHS.PROFILE.MY_COURSE} element={<MyCourse />} />

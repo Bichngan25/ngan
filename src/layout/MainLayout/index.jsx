@@ -27,7 +27,7 @@ const MainLayout = () => {
         {/* Main */}
         <Outlet/>
         <Footer/>
-        <Modal/>
+        {/* <Modal/> */}
         {/* Modal Đăng Nhập / Đăng Ký */}
         <ModalLogin/>
       </AuthContextProvider>
