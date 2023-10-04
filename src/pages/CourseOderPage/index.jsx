@@ -1,131 +1,181 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
+import InfoOrder from './InfoOrder'
+import FormOrder from './FormOrder'
+import PaymentOrder from './PaymentOrder'
+import { useNavigate, useParams } from 'react-router-dom'
+import { courseService } from '../../services/courseService'
+import useMutation from '../../hooks/useMutation'
+import { ROLE } from '../../constants/role'
+import { formatCurrency } from '../../utils/format'
+import useForm from '../../hooks/useForm'
+import { regrexRule, requireRule } from '../../utils/validate'
+import { useAuthContext } from '../../context/AuthContext'
+import Button from '../../components/Button'
+import { message } from 'antd'
+import { orderService } from '../../services/orderService'
+import PATHS from '../../constants/path'
 
 const CourseOderPage = () => {
+  const navigate = useNavigate()
+     // b1: chuan bij data
+
+    // handle getCourseBySlug when courseSlug param change
+    // su dung ham useParams de lay duoc slug
+    const {courseSlug} = useParams()
+    // console.log("courseSlug", courseSlug)
+
+       // ========= GET PROFILE =============
+       const { profile, courseInfo } = useAuthContext();
+      //  console.log("courseInfo", courseInfo)
+      // some : duyet qua mang vaf neu chir co 1 trong nhung dk thoai dk thif se tra ve true
+      // every: duyet qua mang vaf yeu cau tat ca phai thoai dk, con neu chi can 1 dk k thoai thi se tra ve false
+      const isAlreadyOrder = courseInfo?.some((item) => item?.course?.slug === courseSlug)
+       const {
+         firstName: profileName,
+         email: profileEmail,
+         phone: profilePhone,
+       } = profile || {};
+      //  console.log("profile", profile)
+   
+
+       // useMutation: post, put, delete
+    // useQuery: get (lay tt lien vaf k can dieu kien, pahi duoc goi lien ngay luc defined)
+
+
+    //  *** doi voi truong hop : dat dieu kien sau do moi call thi su dung useMutation
+    // execute:  dung de bat su kien 
+    const {data: courseDetailData, execute: executeCourseDetail} = useMutation(
+        courseService.getCourseBySlug
+    )
+        // console.log("courseDetailData", courseDetailData)
+    useEffect(() =>{
+        // neu slug co gia tri tri execute
+        if (courseSlug) executeCourseDetail?.(courseSlug, {})
+    },[])
+
+    //========= modify render data=======
+    const {teams, price, tags} = courseDetailData || {}
+
+    // =========== child props ============
+    const InfoOrderProps = {
+      ...courseDetailData,
+      teacherInfo: teams?.find((item) => item.tags.includes(ROLE.Teacher)) || {},
+      price: formatCurrency(price),
+    };
+    // console.log("InfoOrderProps", InfoOrderProps)
+
+
+ 
+    // ========== Handle PROFILE FORM ===========
+    // khi onsubmit khoa hocj thi goi validate
+    // sau khi validate thi lay thong tin form
+    const {form, register, validate, setForm} = useForm({
+      name: "",
+      email: "",
+      phone: "",
+      type: ""
+    },
+    {
+      name: [requireRule("Vui lòng nhập tên")],
+      email:[
+        requireRule("Vui lòng nhập email"),
+        regrexRule("email","Vui lòng nhập đúng định dạng email")
+      ],
+      phone: [
+        requireRule("Vui lòng nhập số điện thoại"),
+        regrexRule("email","Vui lòng nhập đúng định dạng số điện thoại")
+      ],
+      type: [requireRule("Vui lòng chọn hình thức học")]
+    })
+    
+    useEffect(() => {
+      if(isAlreadyOrder && courseInfo?.length > 0){
+       const orderedCourse = courseInfo?.find((item) => item?.course?.slug === courseSlug)
+       console.log("orderedCourse", orderedCourse)
+       setForm({
+        name: orderedCourse.name || "",
+        email: profileEmail || "",
+        phone: orderedCourse.phone || "",
+        type: orderedCourse.type || "",
+      });
+      setPaymentMethod(orderedCourse.paymentMethod)
+      } else {
+        setForm({
+          name: profileName || "",
+          email: profileEmail || "",
+          phone: profilePhone || "",
+          type: "",
+        });
+      }
+    }, [profileName, profileEmail, profilePhone, isAlreadyOrder]);
+
+      // ============== Handle PAYMENTMETHOD change ==============
+  const [paymentMethod, setPaymentMethod] = useState("");
+  const handlePaymentMethodChange = (payment) => {
+    setPaymentMethod(payment);
+  };
+
+  // ============== HANDLE ORDER COURSE ============
+  const {loading: orderLoading, execute: orderCourse} = useMutation(
+    orderService.orderCourse
+  )
+
+    //  ============== bat su kien onOrder ====================
+    const _onOrder = () => {
+       // b1 : validate form
+       const profileError = validate();
+      //  check xem cai keys cua pfrofileError 
+      if (Object.keys(profileError).length > 0){
+        // console.log("profileError",profileError)
+      } else {
+        if (paymentMethod) {
+          // PAYLOAD
+          const payload = {
+            // dua theo swatger
+            name: form.name,
+            phone: form.phone,
+            course: courseDetailData?.id,
+            type: form.type,
+            paymentMethod
+          }
+          // console.log("payload", payload)
+          orderCourse(payload,{
+            onSuccess: () =>{
+              navigate(PATHS.PROFILE.MY_COURSE)
+              message.success("bạn đã thanh toán thành công")
+            },
+            onFail: () =>{
+              message.error("đăng ký thất bại")
+            }
+          })
+        }else {
+          message.error("vui lòng chọn hình thức thanh toán")
+        }
+      }
+    }
+
+
+    // ============== XU LY CHAN KHOA HOC DA DANG KY =================
+    // B1: vao authcontext
+
   return (
     <div>
         <main className="mainwrapper --ptop">
     <section className="sccourseorder">
       <div className="container small">
-        <div className="itemorder infoorder">
-          <h3 className="title --t3">Thông tin đơn hàng</h3>
-          <div className="boxorder">
-            <div className="boxorder__col">
-              <label className="label">Tên khoá học</label>
-              <div className="boxorder__col-course">
-                <div className="img"><img src="https://cfdcircle.vn/files/thumbnails/JUVoVxn36lQtCl20hHoEPMo8JJENBX5qXfI1U13k.jpg" alt /></div>
-                <div className="info">
-                  <p className="name"><strong>Frontend Master</strong></p>
-                  <p>Trần Nghĩa</p>
-                </div>
-              </div>
-            </div>
-            <div className="boxorder__col">
-              <label className="label">Tạm tính</label>
-              <p>14,700,000đ</p>
-            </div>
-            <div className="boxorder__col">
-              <label className="label">Giảm giá</label>
-              <p>0đ</p>
-            </div>
-            <div className="boxorder__col">
-              <label className="label">thành tiền</label>
-              <p><strong>14,700,000đ</strong></p>
-            </div>
-          </div>
-        </div>
-        <div className="itemorder formorder">
-          <h3 className="title --t3">Thông tin cá nhân</h3>
-          <div className="boxorder">
-            <form action="#" className="form">
-              <div className="form-container">
-                <div className="form-group">
-                  <label className="label">Họ và tên <span>*</span></label>
-                  <input defaultValue="Nghĩa Trần" type="text" className="form__input" />
-                </div>
-                <div className="form-group">
-                  <label className="label">Email <span>*</span></label>
-                  <input defaultValue="nghiatran@2018@gmail.com" disabled type="email" className="form__input" />
-                </div>
-              </div>
-              <div className="form-container">
-                <div className="form-group">
-                  <label className="label">Số điện thoại <span>*</span></label>
-                  {/* <input defaultValue={0928338373} type="text" className="form__input" /> */}
-                </div>
-                <div className="form-group">
-                  <label className="label">Hình thức học <span>*</span></label>
-                  <div className="select select-change">
-                    <div className="head form__input">Học Offline</div>
-                    <div className="sub" >
-                    {/* style={{display: 'none'}} */}
-                      <a href="#" data-value="offline">Học Offline</a>
-                      <a href="#" data-value="online">Học Online</a>
-                    </div>
-                    <input type="text" name="type" hidden defaultValue="offline" />
-                  </div>
-                </div>
-              </div>
-            </form>
-          </div>
-        </div>
-        <div className="itemorder paymentorder">
-          <h3 className="title --t3">Hình thức thanh toán</h3>
-          <div className="boxorder">
-            <div className="boxorder__pay">
-              <label className="radiocontainer">
-                <img src="img/icon-payment-method-atm.svg" alt />
-                Thành toán bằng chuyển khoản
-                <input type="radio" name="radio" />
-                <span className="checkmark" />
-              </label>
-              <div className="boxorder__pay-tooltip">
-                Sau khi bấm đăng ký, mã khoá học &amp; thông tin tài khoản ngân hàng sẽ được gửi đến
-                email của bạn, bạn vui lòng chuyển khoản với nội dung: mã khoá học, họ và tên, số điện
-                thoại, CFD
-                Circle sẽ liên hệ bạn để xác nhận và kích hoạt khoá học của bạn sau khi giao dịch thành
-                công.
-              </div>
-            </div>
-            <div className="boxorder__pay">
-              <label className="radiocontainer">
-                <img src="img/icon-payment-method-mo-mo.svg" alt />
-                Thanh toán bằng ví Momo
-                <input type="radio" name="radio" />
-                <span className="checkmark" />
-              </label>
-              <div className="boxorder__pay-tooltip">
-                Sau khi bấm đăng ký, mã khoá học &amp; thông tin tài khoản MoMo sẽ được gửi đến
-                email của bạn, bạn vui
-                lòng chuyển khoản với nội dung: mã khoá học, họ và tên, số điện thoại, CFD
-                Circle sẽ liên hệ bạn để xác nhận và kích hoạt khoá học của bạn sau khi giao dịch thành
-                công.
-              </div>
-            </div>
-            {/* Khoá học video và video mentor thì không có thanh toán tiền mặt */}
-            <div className="boxorder__pay">
-              <label className="radiocontainer">
-                <img src="/img/icon-payment-method-cod.svg" alt />
-                Thanh toán bằng tiền mặt
-                <input type="radio" name="radio" />
-                <span className="checkmark" />
-              </label>
-              <div className="boxorder__pay-tooltip">
-                Sau khi bấm đăng ký, thông tin khoá học sẽ được gửi đến email của bạn, bạn
-                vui lòng đến văn phòng CFD Circle vào ngày khai
-                giảng để đóng học phí tại số 11b, Phan Kế Bính, quận 1, TP Hồ Chí Minh.
-              </div>
-            </div>
-          </div>
-        </div>
+        <InfoOrder {...InfoOrderProps}/>
+        <FormOrder register={register} types={tags || {}} disabled={isAlreadyOrder}/>
+        <PaymentOrder
+        // payment duoc thay doi
+        handleChange={handlePaymentMethodChange}
+        selectedPayment={paymentMethod}
+        disabled={isAlreadyOrder}
+        />
         {/* addclass --processing khi bấm đăng ký */}
-        <div className="btn btn--primary">
-          <span>Đăng ký khoá học</span>
-          <svg version="1.1" id="L9" xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 100 100" enableBackground="new 0 0 0 0" xmlSpace="preserve">
-            <path fill="#fff" d="M73,50c0-12.7-10.3-23-23-23S27,37.3,27,50 M30.9,50c0-10.5,8.5-19.1,19.1-19.1S69.1,39.5,69.1,50">
-              <animateTransform attributeName="transform" attributeType="XML" type="rotate" dur="1s" from="0 50 50" to="360 50 50" repeatCount="indefinite" />
-            </path>
-          </svg>
-        </div>
+        <Button onClick={_onOrder} disabled={isAlreadyOrder} loading={orderLoading} style={{width: "100%"}}>
+          <span>{isAlreadyOrder ? "đã đăng ký" : "Đăng ký khoá học"}</span>
+         
+        </Button>
       </div>
     </section>
   </main>

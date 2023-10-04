@@ -269,36 +269,36 @@ $(document).ready(function () {
     clickTab();
 
     // ============== SHOW HEAD TOP COURSE DETAIL ====================
-    function showHeadCourseDetail() {
-        let buttonRegister = $('.herodetail .btn');
-        if (buttonRegister.length) {
-            let headtop = $('.headtop');
-            let headProgress = $('.headtop__progress');
-            let offsetHead = buttonRegister.offset().top;
-            let pageHeight = $(document).height() - $(window).height();
-            let scrollTop = $(window).scrollTop(); // y
+    // function showHeadCourseDetail() {
+    //     let buttonRegister = $('.herodetail .btn');
+    //     if (buttonRegister.length) {
+    //         let headtop = $('.headtop');
+    //         let headProgress = $('.headtop__progress');
+    //         let offsetHead = buttonRegister.offset().top;
+    //         let pageHeight = $(document).height() - $(window).height();
+    //         let scrollTop = $(window).scrollTop(); // y
 
-            let progress = scrollTop / pageHeight * 100;
+    //         let progress = scrollTop / pageHeight * 100;
 
-            if (offsetHead <= scrollTop) {
-                headtop.addClass('show');
-            } else {
-                headtop.removeClass('show');
-            }
-            headProgress.css({
-                width: progress + '%'
-            });
-        }
-    }
-    function coursePage() {
-        if ($('.coursedetailpage').length) {
-            showHeadCourseDetail();
-            $(window).on('scroll', function () {
-                showHeadCourseDetail();
-            });
-        }
-    }
-    coursePage();
+    //         if (offsetHead <= scrollTop) {
+    //             headtop.addClass('show');
+    //         } else {
+    //             headtop.removeClass('show');
+    //         }
+    //         headProgress.css({
+    //             width: progress + '%'
+    //         });
+    //     }
+    // }
+    // function coursePage() {
+    //     if ($('.coursedetailpage').length) {
+    //         showHeadCourseDetail();
+    //         $(window).on('scroll', function () {
+    //             showHeadCourseDetail();
+    //         });
+    //     }
+    // }
+    // coursePage();
 
     // ========================= DROPDOWN ===========================
     // function hideDropDown() {
@@ -327,11 +327,11 @@ $(document).ready(function () {
 
     //================== SELECT PAYMENT METHOD =====================
 
-    let itemRadioPayment = $('.boxorder__pay');
-    itemRadioPayment.on('click', function () {
-        itemRadioPayment.find('.boxorder__pay-tooltip').hide()
-        $(this).find('.boxorder__pay-tooltip').show()
-    });
+//     let itemRadioPayment = $('.boxorder__pay');
+//     itemRadioPayment.on('click', function () {
+//         itemRadioPayment.find('.boxorder__pay-tooltip').hide()
+//         $(this).find('.boxorder__pay-tooltip').show()
+//     });
 
 
     $(window).on('load', () => {

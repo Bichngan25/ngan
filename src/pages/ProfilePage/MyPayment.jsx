@@ -1,21 +1,27 @@
 import React from 'react'
+import { useAuthContext } from '../../context/AuthContext'
+import CoursePaymentItem from '../../components/CoursePaymentItem'
+import { Empty } from 'antd'
 
 const MyPayment = () => {
+  const {paymentInfo} = useAuthContext()
   return (
     <div>
       <div className="tab__content-item" style={{display: 'block'}}>
-                <div className="itemhistory">
-                  <div className="name">Frontend Newbie</div>
-                  <div className="payment">Chuyển khoản</div>
-                  <div className="date">05/01/2022</div>
-                  <div className="money">4.500.000 VND</div>
-                </div>
-                <div className="itemhistory">
-                  <div className="name">Web Responsive</div>
-                  <div className="payment">Tiền mặt</div>
-                  <div className="date">14/07/2022</div>
-                  <div className="money">4.900.000 VND</div>
-                </div>
+              {/* !!! neu k co thi de thong tin la k tim thay du lieu */}
+              {!!!paymentInfo.length && (
+                  <Empty
+                  description="không tìm thấy dữ liệu nào"
+                  style={{margin: "0 auto"}}
+                  />
+                )}
+                  {/* !! neu co thif lay du lieu */}
+                  {!!paymentInfo.length && paymentInfo.map((item, index) =>(
+                  <CoursePaymentItem 
+                  key={item.id || new Date().getTime() + index}
+                  {...item}
+                  />
+                ))}
               </div>
     </div>
   )

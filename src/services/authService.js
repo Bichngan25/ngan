@@ -4,6 +4,7 @@ import tokenMethod from "../utils/token";
 
 // b1:  dau tien dung axiosInstance.post sau co check trong swagger phan login
 // b2: tao payload va sau do truyen payload vao return
+// ===== nho xem phuong thuc ======
 
 export const authService = {
   login(payload = {}) {
@@ -24,6 +25,7 @@ export const authService = {
   updateProfile(payload = {}) {
     return axiosInstance.put(`/customer/profiles`, payload, {
       headers: {
+        // nho de y multipart or application
         "Content-Type": "multipart/form-data",
       },
     });

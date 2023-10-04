@@ -1,4 +1,4 @@
 export const ROLE = {
-    teacher: "teacher",
-    mentor: "mentor"
+    Teacher: "Teacher",
+    Mentor: "Mentor"
 }

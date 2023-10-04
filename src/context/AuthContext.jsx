@@ -4,6 +4,7 @@ import { message } from "antd";
 import tokenMethod, { cookieToken, localToken } from "../utils/token";
 import { useNavigate } from "react-router-dom";
 import PATHS from "../constants/path";
+import { orderService } from "../services/orderService";
 
 const AuthContext = createContext({});
 
@@ -11,12 +12,16 @@ const AuthContextProvider = ({ children }) => {
   const navigate = useNavigate()
   const [showedModal, setShowedModal] = useState("");
   const [profile, setProfile] = useState ({}) // la object rong
+  const [courseInfo, setCourseInfo] = useState([])
+  const [paymentInfo , setPaymentInfo] = useState ([])
   useEffect (() =>{
     // neu accessToken co thi 
     const accessToken = !!tokenMethod.get()?.accessToken
     if(accessToken) {
       // lay:
       handleGetProfile()
+      handleGetProfileCourse()
+      handleGetProfilePayment()
     }
   })
   const handleShowModal = (modalType) => {
@@ -93,7 +98,7 @@ const AuthContextProvider = ({ children }) => {
     // xu ly API 
     try {
       const res = await authService.register(payload)
-      if (res?.data?.data?.Id){
+      if (res?.data?.data?.id){
         // handleLogin (neu dk xong dang nhap luon account)
         handleLogin({
           email,
@@ -135,7 +140,7 @@ const AuthContextProvider = ({ children }) => {
     // ====> profile se duoc goi khi login vi vay vao ham login de bo profile
     try {
       // xem trong authService
-      const res =await authService.getProfile()
+      const res = await authService.getProfile()
       // check neu co du lieu thi tra ve profile ?
       if (res?.data?.data) {
         setProfile(res.data.data)
@@ -147,9 +152,59 @@ const AuthContextProvider = ({ children }) => {
     }
   }
 
+  // ===================== XU LY CHAN CAC KHOA HOC DA DANG KY ====================
+  // b1: call API
+  // b2: co 2 cai useState de phia tren de chua
+  // b3: check trong useEffect xem co token hay k
+  const handleGetProfileCourse = async () =>{
+    try {
+      const res = await orderService.getCourseHistories();
+      const orderedCourses = res?.data?.data?.orders || [];
+      setCourseInfo(orderedCourses)
+    } catch (error) {
+      console.log("getCourseHistories error", error)
+    }
+  }
+
+  const handleGetProfilePayment = async () =>{
+    try {
+      const res = await orderService.getPaymentHistories();
+      const payments = res?.data?.data?.orders || [];
+      setPaymentInfo(payments)
+    } catch (error) {
+      console.log("getPaymentHistories error", error)
+    }
+  }
+
+  // ========= call API UPDATE THONG TIN TAI KHOAN =========
+  const handleUpdateProfile = async (profileData) =>{
+    try {
+      const {firstName, email, password,facebookURL, introduce, phone, website } = profileData
+      const payload = {firstName: firstName,
+         lastName: "",
+          email,
+          password,
+          facebookURL,
+          website,
+          introduce,
+          phone
+        }
+      const res = await authService.updateProfile(payload);
+      console.log("res?.data?.data", res?.data?.data)
+      if (res?.data?.data?.id){
+        message.success("cập nhật thông tin thành công")
+        // can phai update lai thong tin moi
+        handleGetProfile();
+      } 
+    } catch (error) {
+      console.log("error", error)
+      message.error("cập nhật thông tin thất bại")
+    }
+  }
+
   return (
     <AuthContext.Provider
-      value={{ showedModal, profile, handleShowModal, handleCloseModal, handleLogin,handleLogout, handleRegister }}
+      value={{ showedModal, profile, courseInfo, paymentInfo, handleShowModal, handleCloseModal, handleLogin,handleLogout, handleRegister, handleGetProfileCourse, handleGetProfilePayment, handleUpdateProfile }}
     >
       {children}
     </AuthContext.Provider>

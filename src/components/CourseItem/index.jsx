@@ -14,8 +14,8 @@ const CourseItem = ({ type = COURSE_ITEM_TYPE.normal ,image, slug, name, teams, 
     const detailPath = PATHS.COURSE.INDEX + `/${slug}`
     const courseOrderPath = "/course-order" + `/${slug}`
     // role: ben constant
-    const teacherInfor = teams?.find((item) => item.tags.includes(ROLE.teacher) )
-    // console.log("teacherInfor", teacherInfor)
+    const teacherInfo = teams?.find((item) => item.tags.includes(ROLE.Teacher));
+    console.log("teacherInfo", teacherInfo)
 
 
     // ========== COURSE ============//
@@ -33,10 +33,10 @@ const CourseItem = ({ type = COURSE_ITEM_TYPE.normal ,image, slug, name, teams, 
               <h3 className="title --t3"><Link to={detailPath}>{name}</Link></h3>
               <div className="content__info">
               {
-                teacherInfor && (
+                teacherInfo && (
                   <div className="user">
-                  <div className="user__img"><img src={teacherInfor.image || ""} alt="Avatar teacher" /></div>
-                  <p className="user__name">{teacherInfor.name}</p>
+                  <div className="user__img"><img src={teacherInfo.image || ""} alt="Avatar teacher" /></div>
+                  <p className="user__name">{teacherInfo.name}</p>
                 </div>
                 )
               }
@@ -66,12 +66,12 @@ const CourseItem = ({ type = COURSE_ITEM_TYPE.normal ,image, slug, name, teams, 
                   <h2 className="title --t2"><Link to={detailPath}>{name || ""}</Link></h2>
                   {
                     // check lai thong tin xem co thong tin hay k
-                    teacherInfor?.id && (
+                    teacherInfo?.id && (
                         <div className="user">
                     <div className="user__img">
-                      <img src={teacherInfor.image || ""} alt="Avatar teacher" />
+                      <img src={teacherInfo.image || ""} alt="Avatar teacher" />
                     </div>
-                    <p className="user__name">{teacherInfor.name || ""}</p>
+                    <p className="user__name">{teacherInfo.name || ""}</p>
                   </div>
                     )
                   }

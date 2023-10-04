@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import { useState } from "react"
 
   // return ve ham execute (ham thuc thi) , data, error, loading
 //   nho nhan vao promite
@@ -8,13 +8,9 @@ const useMutation = (promise) => {
     const [loading, setLoading] = useState(false)
 
     // nho nhan vao payload
-    const execute = async (payload, {
+    const execute = async (payload, callback = {})=> {
         // dua quy quyet dinh khi chay ham thanh cong vaf that bai
-        onSuccess,
-        onFail,
-    }) => {
-        setLoading(true)
-
+        const {onSuccess, onFail} = callback
         // try {
         //     const res = await axios.post("https://cfdcourses.cfdcircle.vn/api/v1/subscribes",payload)
         //     console.log("res", res)
@@ -29,12 +25,11 @@ const useMutation = (promise) => {
         //   }
 
         try {
+          setLoading(true)
             // promise se thay the await axios.post("https://cfdcourses.cfdcircle.vn/api/v1/subscribes",payload)
             const res = await promise(payload)
-            if (res.data){
-                setData(res.data)
-                onSuccess?.(res.data)
-            }
+            setData(res.data?.data || [])
+            onSuccess?.(res.data?.data)
           } catch (error) {
             setError(error)
             onFail?.(error)

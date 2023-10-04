@@ -23,7 +23,8 @@ const useForm = (initialValue, rules) => {
     form,
     error,
     register,
-    validate: _validate
+    validate: _validate,
+    setForm
   }
 }
 

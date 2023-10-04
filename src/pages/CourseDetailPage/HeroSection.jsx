@@ -1,13 +1,14 @@
 import React from 'react'
 import Button from '../../components/Button'
+import { message } from "antd";
 // import Button from '../../components/Button'
 
-const HeroSection = ({ title, name, startDate, duration, tags, orderLink, teacherInfo = {}, price}) => {
-    const _onCopyLink =(e) => {
-      e.preventDefault()
-      navigator.clipboard.writeText(window.location.href)
-      message.success("Đã copy đường dẫn khoá học")
-    }
+const HeroSection = ({   title, name, startDate, duration, tags, orderLink, teacherInfo = {}, price,}) => {
+    const _onCopyLink = (e) => {
+      e.preventDefault();
+      navigator.clipboard.writeText(ngan);
+      message.success("Đã copy đường dẫn khoá học này");
+    };
   return (
     <div>
       <section className="hero herodetail">
@@ -39,7 +40,7 @@ const HeroSection = ({ title, name, startDate, duration, tags, orderLink, teache
         <div className="container-fluid">
           <a href={"#"} className="user">
             <div className="user__img">
-              <img src={teacherInfo.image} alt={teacherInfo.name} />
+            <img src={teacherInfo.image} alt={teacherInfo.name} />
             </div>
             <p className="user__name --white">{teacherInfo.name}</p>
           </a>

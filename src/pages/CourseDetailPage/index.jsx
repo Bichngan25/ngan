@@ -3,7 +3,7 @@ import { useParams } from 'react-router-dom'
 import HeroSection from './HeroSection';
 import ContentDetailSection from './ContentDetailSection';
 import FeaturedSection from './FeaturedSection';
-import FaqSection from './FaqSection';
+import FaqSection from '../HomePage/FaqSection';
 import CoursesSection from './CoursesSection';
 import HeaderTop from '../../components/HeaderTop';
 import { courseService } from '../../services/courseService';
@@ -12,6 +12,10 @@ import useQuery from '../../hooks/useQuery';
 import { formatCurrency, formatDate } from '../../utils/format'
 import useDebounce from '../../hooks/useDebounce';
 import PageLoading from '../../components/PageLoading';
+import { questionService } from '../../services/questionService';
+import { ROLE } from '../../constants/role';
+// import { ROLE } from '../../constants/role'
+
 
 
 
@@ -24,32 +28,51 @@ import PageLoading from '../../components/PageLoading';
 
 const CourseDetailPage = () => {
   const params = useParams();
-  // console.log("params", params)
-  const { courseslug } = useParams();
-  console.log("courseslug", courseslug)
-  const {data: questionsData, loading: questionLoading} = useQuery (
+  // console.log("params",params)
+  const { courseSlug } = params;
+  // console.log("courseSlug",courseSlug)
+  // la danh sach cau hoi
+  const { data: questionsData, loading: questionLoading } = useQuery(
+    questionService.getQuestion
+  );
+  // lay chi tiet khoa hoc de render ra cac khoa hoc lien quan
+  const { data: courseData, loading: courseLoading } = useQuery(
     courseService.getCourses
   );
-  const {data: courseData, loading: courseLoading} = useQuery
-  const {data: courseDetailData,loading: courseDetailLoading, execute, } = useMutation(courseService.getCourseBySlug)
-    useEffect(() =>{
-      if (courseslug) execute (courseslug || "", {})
-    },[])
 
+  // lay chi tiet khoa hoc
+  // useQuery: get
+  // useMutation: put, post, delete,...
+  const {
+    data: courseDetailData,
+    loading: courseDetailLoading,
+    execute,
+  } = useMutation(courseService.getCourseBySlug);
 
+  // neu co courseSlug thi dung execute 
+  useEffect(() => {
+    if (courseSlug) execute(courseSlug || "");
+  }, [courseSlug]);
 
-    // Modify Data
-    const questions = questionsData?.questions || []
-    const courses = courseData?.courses || []
-    const orderLink = `/course-order` + courseslug;
+  // Modify data
+  const questions = questionsData?.questions || [];
+  // console.log("questions",questions)
+  const courses = courseData?.courses || [];
+  console.log("courses",courses)
+  const orderLink = `/course-order/` + courseSlug;
+  // console.log("orderLink",orderLink)
 
-    const {teams, startDate, price} = courseDetailData || {}
-    const modifiedProps = {...courseDetailData,
-    teacherInfor: teams?.find((item) => item.tags.includes(Roles.Teacher)),
-    startDate : formatDate(startDate || ""),
+  const { teams, startDate, price } = courseDetailData || {};
+
+  const modifiedProps = {
+    ...courseDetailData,
+    teacherInfo: teams?.find((item) => item.tags.includes(ROLE.Teacher)),
+    startDate: formatDate(startDate || ""),
     price: formatCurrency(price),
-    orderLink
-  }
+    orderLink,
+  };
+
+  console.log("modifiedProps",modifiedProps)
 
   const apiLoading = courseDetailLoading || questionLoading || courseLoading;
 
@@ -58,6 +81,7 @@ const CourseDetailPage = () => {
   if (pageLoading) {
     return <PageLoading />;
   }
+
 
   return (
     <div>

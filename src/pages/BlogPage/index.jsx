@@ -1,6 +1,9 @@
 import React from 'react'
+import { useNavigate } from 'react-router-dom'
 
 const BlogPage = () => {
+  const navigave = useNavigate ()
+  
   return (
     <div>
     <main className="mainwrapper blog --ptop">

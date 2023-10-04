@@ -1,5 +1,6 @@
-import { Empty } from 'antd';
+import { Empty, Skeleton } from 'antd';
 import React from 'react'
+import CourseItem from '../../components/CourseItem';
 
 const CoursesSection = ({ courses = [], loading = false }) => {
   return (
