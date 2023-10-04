@@ -23,7 +23,7 @@ const AuthContextProvider = ({ children }) => {
       handleGetProfileCourse()
       handleGetProfilePayment()
     }
-  })
+  },[])
   const handleShowModal = (modalType) => {
     setShowedModal(modalType || "");
   };
