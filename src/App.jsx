@@ -37,7 +37,7 @@ function App() {
             {/* vao constants de tao path.js */}
             <Route path={PATHS.COURSE.INDEX} element={<CoursesPage/>} />
             <Route path={PATHS.COURSE.DETAIL} element={<CourseDetailPage/>} />
-            <Route path={PATHS.COURSE.ORDER} element={<CourseOderPage/>} />
+            {/* <Route path={PATHS.COURSE.ORDER} element={<CourseOderPage/>} /> */}
 
             <Route path={PATHS.PAYMENT} element={<PaymentMethodPage/>} />
             <Route path={PATHS.PRIVACY} element={<PrivacyPage/>} />

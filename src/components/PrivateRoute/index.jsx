@@ -8,7 +8,7 @@ import { MODAL_TYPE } from '../../constants/general'
 // b1: truyen vao cais path ten redirectPath
 const PrivateRoute = ({redirectPath = ""}) => {
     // B4 : 
-    const {handleShowModal} = useAuthContext
+    const {handleShowModal} = useAuthContext()
     const navigate = useNavigate()
     // b2 :neu k co tokenMethod.get
     useEffect(()=>{
@@ -18,7 +18,7 @@ const PrivateRoute = ({redirectPath = ""}) => {
             // tra ve navigate den redirectPath
         }
     },[handleShowModal])
-
+    console.log(tokenMethod.get())
     if(!!!tokenMethod.get()) {
     if(redirectPath) {
         return <Navigate to={redirectPath}/>

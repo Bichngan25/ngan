@@ -1,10 +1,17 @@
-import React from 'react'
+import React, { forwardRef, useImperativeHandle } from 'react'
 import Input from '../../components/Input'
 import Select from '../../components/Select'
 // import Select from "@/components/Select";
     // ============ FROM KHONG CO NUT BUTTON SUBMIT ============
     // handle profile form ben ngoai
-    const FormOrder = ({ register, types , disabled }) => {
+    const FormOrder = ({ register, types , disabled }, ref) => {
+
+      useImperativeHandle(ref,() =>{
+        return{
+          validate,
+          form
+        }
+      })
         const typeOptions =
           types?.length > 0
             ? [
@@ -59,4 +66,4 @@ import Select from '../../components/Select'
       );
     };
     
-    export default FormOrder;
+    export default forwardRef(FormOrder);

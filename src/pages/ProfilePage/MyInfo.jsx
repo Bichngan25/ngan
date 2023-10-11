@@ -48,10 +48,12 @@ const MyInfo = () => {
   }
 
   useEffect(() =>{
+    console.log(2)
     if (profile) {
       setForm({...form, ...profile})
     }
   },[profile])
+  console.log(1)
   return (
     <div>
       <div className="tab__content-item" style={{display: 'block'}}>
@@ -103,7 +105,7 @@ const MyInfo = () => {
                       }}
                       {...register("introduce")}
                       />
-                    <div className="btnsubmit">
+                    <div className="btnsubmit" onClick={_onSubmit}>
                       <Button >Lưu lại</Button>
                     </div>
                 </form>

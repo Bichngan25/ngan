@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import InfoOrder from './InfoOrder'
 import FormOrder from './FormOrder'
 import PaymentOrder from './PaymentOrder'
@@ -16,6 +16,7 @@ import { orderService } from '../../services/orderService'
 import PATHS from '../../constants/path'
 
 const CourseOderPage = () => {
+  const formRef = useRef({})
   const navigate = useNavigate()
      // b1: chuan bij data
 
@@ -170,6 +171,7 @@ const CourseOderPage = () => {
         handleChange={handlePaymentMethodChange}
         selectedPayment={paymentMethod}
         disabled={isAlreadyOrder}
+        ref={formRef}
         />
         {/* addclass --processing khi bấm đăng ký */}
         <Button onClick={_onOrder} disabled={isAlreadyOrder} loading={orderLoading} style={{width: "100%"}}>

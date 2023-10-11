@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { forwardRef } from 'react'
 
 // b1: input can label, required(yeu cau co dau sao hay k co dau sao), error
         // required && : neu co thi hien thi, k co thi k hien thi
@@ -6,7 +6,7 @@ import React from 'react'
         // ...rest : la nhung pros con lai
 // b2: dua bien vao de xu li dieu kien
 
-const Input = ({label, required, error,renderInput, ...rest}) => {
+const Input = ({label, required, error,renderInput, ...rest}, ref) => {
   
   return (
     <div>
@@ -17,7 +17,8 @@ const Input = ({label, required, error,renderInput, ...rest}) => {
                 <input 
                 type="text"
                 {...rest}
-                className={`form__input ${error ? "formerror" : ""}`} />
+                className={`form__input ${error ? "formerror" : ""}`} 
+                ref={ref}/>
                 )
               }
               {/* b2: dua bien vao de xu li dieu kien */}
@@ -31,4 +32,4 @@ const Input = ({label, required, error,renderInput, ...rest}) => {
   )
 }
 
-export default Input
+export default forwardRef(Input)

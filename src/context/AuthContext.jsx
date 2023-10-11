@@ -14,6 +14,7 @@ const AuthContextProvider = ({ children }) => {
   const [profile, setProfile] = useState ({}) // la object rong
   const [courseInfo, setCourseInfo] = useState([])
   const [paymentInfo , setPaymentInfo] = useState ([])
+  // console.log("profile 1",profile)
   useEffect (() =>{
     // neu accessToken co thi 
     const accessToken = !!tokenMethod.get()?.accessToken

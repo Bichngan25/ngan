@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useRef } from 'react'
 import { useAuthContext } from '../../context/AuthContext'
 import { MODAL_TYPE } from '../../constants/general'
 import LoginForm from './LoginForm'
@@ -6,6 +6,7 @@ import RegisterForm from './RegisterForm'
 import ReactDOM from 'react-dom'
 const ModalLogin = () => {
   const {showedModal, handleCloseModal} = useAuthContext()
+  const loginFormFocusRef = useRef()
   return ReactDOM.createPortal(
     <div>
         <div className={`modal modallogin ${!!showedModal ? "open" : ""}`}>
@@ -14,7 +15,7 @@ const ModalLogin = () => {
         <img src="/img/close_icon.svg" alt="CFD Register" />
       </div>
       {
-        showedModal === MODAL_TYPE.login && <LoginForm/>
+        showedModal === MODAL_TYPE.login && <LoginForm ref={loginFormFocusRef}/>
 
       }
       {
