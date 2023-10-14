@@ -1,27 +1,6 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react'
 
-//   const [courses, setCourses] = useState([]);
-//   const [courseLoading, setCourseLoading] = useState (false);
-
-  // console.log("courses", courses)
-  // const fetchCourses = async () => {
-  //   setCourseLoading(true)
-  //   try {
-  //     const res = await axios.get ("https://cfdcourses.cfdcircle.vn/api/v1/courses")
-  //     console.log("res", res)
-  //     if (res?.data){
-  //       setCourses(res.data)
-  //     }
-  //   }
-  //   catch (error) {
-  //     console.log("error", error)
-  //   }
-  // }
-  // useEffect(() =>{
-  //   fetchCourses();
-  // },[]);
-
   // TRA VE DATA, ERROR, LOADING, REFETCH
   // VI VAY CAN TAO HAM 
 
