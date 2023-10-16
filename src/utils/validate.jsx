@@ -1,25 +1,4 @@
-// b1: taoj ham validate
 
-// const rules = {
-//     name: [
-//       {
-//         required:true,
-//         message: "Vui lòng nhập tên"
-//       }
-//     ],
-//     email: [
-//       {
-//         required:true,
-//         message: "Vui lòng nhập email"
-//       },
-//       {
-//         regrex:/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/g,
-//         message: "Vui lòng nhập đúng định dạng email"
-//       }
-//     ]
-//   }
-
-// tao ham regrex de toi uu code 
 const REGREX ={
     email:/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/,
     phone: /(84|0[3|5|7|8|9])+([0-9]{8})\b/
